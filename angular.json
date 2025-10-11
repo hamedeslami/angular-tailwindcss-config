@@ -5,7 +5,21 @@
   "projects": {
     "angular-config": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": true,
+          "inlineTemplate": false,
+          "inlineStyle": false,
+          "style": "css",
+          "skipTests": true,
+          "path": "src/app/features",
+          "flat": false,
+          "type": ""
+        },
+        "@schematics/angular:route": {
+          "standalone": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
