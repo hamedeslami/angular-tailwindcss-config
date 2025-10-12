@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { LangService } from './core/services/lang.service';
+import { LangTitleStrategy } from '@core/strategies/lang-title.strategy';
 
 
 export const appConfig: ApplicationConfig = {
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
       const langService = inject(LangService);
       return langService.init();
     }),
+    { provide: LangTitleStrategy, useClass: LangTitleStrategy },
   ]
 };

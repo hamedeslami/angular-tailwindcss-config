@@ -1,5 +1,7 @@
 import { Injectable, signal, computed } from '@angular/core';
 
+export type LangCode = 'fa' | 'en';
+
 @Injectable({ providedIn: 'root' })
 export class LangService {
   private readonly _lang = signal<'fa' | 'en'>('fa');
