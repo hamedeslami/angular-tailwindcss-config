@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 
 @font-face {
     font-family: 'IRANYekanX';
@@ -17,6 +19,17 @@
     font-style: normal;
     font-display: swap;
 }
+
+html {
+  transition: background-color 0.45s cubic-bezier(.2,.8,.2,1), color 0.45s cubic-bezier(.2,.8,.2,1);
+}
+
+/* optional: soft-ish background transform while animating (subtle) */
+html.theme-animate {
+  transition: transform 0.45s ease, filter 0.45s ease;
+}
+
+/* canvas host already z-indexed by component styles */
 
 body {
     font-family: 'IRANYekanX', 'Helvetica Neue', sans-serif;
