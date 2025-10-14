@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, forwardRef, input } from '@angular/core';
+import { Component, forwardRef, input, signal } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -21,9 +21,10 @@ export class FloatingLabel {
   errorMessage = input<string>('');
   required = input<boolean>(false);
   disabled = input<boolean>(false);
-  inputmode = input<'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url'>('text');
+  inputmode = input<'none' | 'text' | 'decimal' | 'numeric' | 'tel' | 'search' | 'email' | 'url' | 'password'>('text');
   maxlength = input<number>(500);
-
+  type = input<'text' | 'number' | 'tel' | 'email' | 'url' | 'password'>('text');
+  isPasswordVisible = signal(false);
 
   value: string = '';
 
@@ -46,5 +47,11 @@ export class FloatingLabel {
     const val = event.target.value;
     this.value = val;
     this.onChange(val);
+  }
+
+  
+
+  togglePasswordVisibility() {
+    this.isPasswordVisible.update((prev) => !prev);
   }
 }

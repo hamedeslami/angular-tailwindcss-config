@@ -1,10 +1,32 @@
 <section>
     <div class="mb-5 sm:mb-8">
-        <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
-            {{ texts().title }}
-        </h1>
-        <p class="text-sm text-gray-500 dark:text-gray-400">
-            {{ texts().subtitle }}
-        </p>
+
+        <div class="mb-6">
+            <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
+                {{ texts().title }}
+            </h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+                {{ texts().subtitle }}
+            </p>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="mb-6">
+                <app-floating-label [label]="'نام کاربری'" formControlName="username" [id]="'username'"
+                    [required]="true" [inputmode]="'text'" 
+                    [error]="form.get('username')?.invalid && form.get('username')?.touched || false"
+                    [errorMessage]="'نام کاربری معتبر نمی باشد.'" />
+            </div>
+
+            <div class="mb-6">
+                <app-floating-label [label]="'گذرواژه'" formControlName="password" [id]="'password'"
+                    [required]="true" [inputmode]="'text'" [type]="'password'"
+                    [error]="form.get('password')?.invalid && form.get('password')?.touched || false"
+                    [errorMessage]="'گذرواژه معتبر نمی باشد.'" />
+            </div>
+
+            <app-button type="submit" [disabled]="form.invalid || isLoading()" [loading]="isLoading()">دریافت کد
+                تایید</app-button>
+        </form>
     </div>
 </section>
