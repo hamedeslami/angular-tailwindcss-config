@@ -1,0 +1,19 @@
+<form class="mx-auto">
+    <div class="flex mb-2 gap-3 justify-center" [class.flex-row-reverse]="startFromRight()">
+        @for (digit of code; track $index) {
+        <div dir="ltr">
+            <input #codeInput type="text" maxlength="1" (keyup)="onKeyUp($event, $index)" (paste)="onPaste($event)"
+                class="block w-12 h-13 py-3 text-xl font-normal text-center text-gray-900 
+                 bg-white border rounded-lg focus:ring-0 focus:outline-none
+                 {{ error() ? 'border-red-500 focus-visible:border-red-500' : 'border-[#F0F0F1] focus-visible:border-[#0164BC]' }}"
+                name="code-input" required />
+        </div>
+        }
+    </div>
+    @if(error()){
+    <p class="text-red-500 text-sm text-right">
+        {{ errorMessage() }}
+    </p>
+    }
+
+</form>

@@ -1,0 +1,38 @@
+@if(isOpen()){
+
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/60" (click)="onClose()">
+
+    <div [ngClass]="{
+        'bg-white rounded-lg w-full relative': true,
+        'max-w-sm': size() === 'sm',
+        'max-w-md': size() === 'md',
+        'max-w-lg': size() === 'lg',
+        'max-w-xl': size() === 'xl',
+        'max-w-2xl': size() === '2xl'
+        }" (click)="preventClose($event)">
+
+        @if(variant() === 'normal'){
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-lg font-semibold">{{ title() }}</h2>
+            <button (click)="onClose()" aria-label="close" class="cursor-pointer text-gray-400 hover:text-gray-600">
+                ✕
+            </button>
+        </div>
+        }
+
+
+        <div [ngClass]="{'modal-body':true, 'text-center': variant() !== 'normal'}" class="mt-6">
+            @if(variant() !== 'normal'){
+            <div class="flex justify-center items-center">
+                @if(variant() === 'success'){
+                <img src="assets/images/icons/ok.svg" alt="ok icon" class="mb-6"/>
+                }@else if(variant() === 'error'){
+                <img src="assets/images/icons/not-ok.svg" alt="not ok icon" class="mb-6"/>
+                }
+            </div>
+            }
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
+}

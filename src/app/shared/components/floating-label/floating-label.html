@@ -1,0 +1,28 @@
+<div class="relative">
+    <input [id]="id()" type="text" [attr.maxlength]="maxlength()" [attr.inputmode]="inputmode()" [value]="value"
+        (input)="handleInput($event)" (blur)="onTouched()" [disabled]="disabled()" pattern="[0-9]*" [ngClass]="{
+                        'block px-[12px] py-[16px] w-full text-sm bg-transparent text-gray-900 rounded-lg border-1 appearance-none focus:outline-none focus:ring-0 border-[#E0E0E2] focus:border-[#0164BC] peer ': true,
+                        'border-red-600 focus:border-red-600 border-2': error()
+                        }" placeholder=" " />
+    <label [for]="id()" [ngClass]="{
+                        'absolute text-sm duration-300 transform -translate-y-4 scale-75 z-10 origin-[0] text-[#424750] peer-focus:text-[#0164BC] bg-white top-2 px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:-translate-x-1 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 start-1 translate-x-1/4 peer-focus:translate-x-1/4 peer-focus:left-auto': true,
+                        'text-red-600 peer-focus:text-red-600': error()
+                        }
+        ">
+        {{label()}}
+        @if(required()){
+        <span class="text-red-500">*</span>
+        }
+    </label>
+    @if(error()){
+    <span class="absolute inset-y-0 end-3 flex items-center pointer-events-none text-red-600">
+        <img src="assets/images/icons/error.svg" alt="error icon" />
+    </span>
+    }
+
+</div>
+@if(error()){
+<div class="text-red-500 text-xs mt-1">
+    {{errorMessage()}}
+</div>
+}

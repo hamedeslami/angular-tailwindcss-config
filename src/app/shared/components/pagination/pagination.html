@@ -1,0 +1,72 @@
+<div class="flex justify-center md:justify-between bg-white rounded-2xl px-[24px] py-[16px] mt-6">
+
+  <!-- Left: Go-to-page input + pagination -->
+  <div class="flex items-center gap-4">
+
+    <!-- Go-to-page input -->
+    <div class="hidden md:block md:flex md:gap-2">
+      <p class="text-sm">برو به</p>
+      <input type="number" min="1" [max]="totalPages" (keyup.enter)="goToPageFromEvent($event)"
+        class="h-[28px] w-[50px] bg-gray-50 border border-neutral-300 text-gray-900 text-sm rounded-sm focus:ring-0 focus:outline-none block p-2.5" />
+    </div>
+
+    <!-- Pagination numbers -->
+    <nav aria-label="page navigation">
+      <ul class="inline-flex items-center -space-x-px text-base h-10">
+
+        <!-- Prev -->
+        <li>
+          <button aria-label="prev page" (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1"
+            class="flex items-center justify-center px-4 h-10 disabled:opacity-50">
+            <img src="assets/images/icons/right-arrow.svg" alt="right arrow icon" />
+          </button>
+        </li>
+
+        <!-- Pages -->
+        @for (page of visiblePages; track page) {
+        <li>
+          @if ($any(page) === '...') {
+          <span class="flex items-center justify-center h-[28px] w-[28px] text-xs text-gray-400">...</span>
+          } @else {
+          <button aria-label="pages" (click)="changePage($any(page))" [class]="
+                  'flex items-center justify-center h-[28px] w-[28px] text-xs cursor-pointer ' +
+                  ($any(page) === currentPage
+                    ? 'text-white bg-[#0164BC] rounded-sm hover:bg-[#004683]'
+                    : 'text-gray-500 hover:text-gray-700')
+                " [attr.aria-current]="$any(page) === currentPage ? 'page' : null">
+            {{ page }}
+          </button>
+          }
+        </li>
+        }
+
+        <!-- Next -->
+        <li>
+          <button aria-label="next page" (click)="changePage(currentPage() + 1)" [disabled]="currentPage() === totalPages"
+            class="flex items-center justify-center px-4 h-10 disabled:opacity-50">
+            <img src="assets/images/icons/left-arrow.svg" alt="left arrow icon" />
+          </button>
+        </li>
+
+      </ul>
+    </nav>
+  </div>
+
+  <!-- Right: Items-per-page selector + range display -->
+  <div class="flex items-center gap-4">
+
+    <!-- Items per page selector -->
+    <div class="hidden md:inline-block relative  text-left">
+      <select aria-label="items per page" id="itemsPerPageSelect" [value]="itemsPerPage()" (change)="changeItemsPerPage($any($event.target).value)"
+        class="bg-transparent text-sm font-medium text-gray-700 cursor-pointer">
+        @for(option of itemsPerPageOptions(); track option) {
+        <option [value]="option" [selected]="option === itemsPerPage()">{{ option }}/صفحه</option>
+        }
+      </select>
+    </div>
+
+    <!-- Current range display -->
+    <p class="hidden text-sm md:inline-block">{{ startItem }}-{{ endItem }} از {{ totalItems() }} مورد</p>
+
+  </div>
+</div>
