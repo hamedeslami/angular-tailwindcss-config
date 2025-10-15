@@ -1,5 +1,6 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { ILoginForm } from '@features/auth/models/login.model';
 import { AuthTextService } from '@features/auth/services/auth-text.service';
 import { Button } from '@shared/components/button/button';
@@ -9,7 +10,7 @@ import { FloatingLabel } from '@shared/components/floating-label/floating-label'
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FloatingLabel, Button, ReactiveFormsModule],
+  imports: [FloatingLabel, Button, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
 })
 export class Login {

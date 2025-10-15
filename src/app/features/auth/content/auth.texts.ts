@@ -28,11 +28,11 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
             title: 'ورود به حساب کاربری',
             subtitle: 'لطفاً اطلاعات ورود خود را وارد کنید',
             username: 'نام کاربری',
-            password: 'گذرواژه',
+            password: 'رمز عبور',
             button: 'ورود',
             forgotPassword: 'رمز عبور را فراموش کرده‌اید؟',
             invalidUsername: 'نام کاربری معتبر نمی باشد.',
-            invalidPassword: 'گذرواژه معتبر نمی باشد.'
+            invalidPassword: 'رمز عبور معتبر نمی باشد.'
         },
         forgotPassword: {
             title: 'بازیابی رمز عبور',

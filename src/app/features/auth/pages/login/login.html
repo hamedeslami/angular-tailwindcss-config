@@ -23,6 +23,7 @@
                     [required]="true" [inputmode]="'text'" [type]="'password'"
                     [error]="form.get('password')?.invalid && form.get('password')?.touched || false"
                     [errorMessage]="texts()['invalidPassword'] ?? ' '" />
+                    <a routerLink="/auth/forgot-password" class="text-xs text-gray-500 dark:text-gray-400 cursor-pointer">{{texts()['forgotPassword']}}</a>
             </div>
 
             <app-button type="submit" [disabled]="form.invalid || isLoading()" [loading]="isLoading()">{{ texts().button }}</app-button>
