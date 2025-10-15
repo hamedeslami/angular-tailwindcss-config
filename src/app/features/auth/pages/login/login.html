@@ -12,21 +12,20 @@
 
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="mb-6">
-                <app-floating-label [label]="'نام کاربری'" formControlName="username" [id]="'username'"
+                <app-floating-label [label]="texts()['username'] ?? ' '" formControlName="username" [id]="'username'"
                     [required]="true" [inputmode]="'text'" 
                     [error]="form.get('username')?.invalid && form.get('username')?.touched || false"
-                    [errorMessage]="'نام کاربری معتبر نمی باشد.'" />
+                    [errorMessage]="texts()['invalidUsername'] ?? ' '" />
             </div>
 
             <div class="mb-6">
-                <app-floating-label [label]="'گذرواژه'" formControlName="password" [id]="'password'"
+                <app-floating-label [label]="texts()['password'] ?? ' '" formControlName="password" [id]="'password'"
                     [required]="true" [inputmode]="'text'" [type]="'password'"
                     [error]="form.get('password')?.invalid && form.get('password')?.touched || false"
-                    [errorMessage]="'گذرواژه معتبر نمی باشد.'" />
+                    [errorMessage]="texts()['invalidPassword'] ?? ' '" />
             </div>
 
-            <app-button type="submit" [disabled]="form.invalid || isLoading()" [loading]="isLoading()">دریافت کد
-                تایید</app-button>
+            <app-button type="submit" [disabled]="form.invalid || isLoading()" [loading]="isLoading()">{{ texts().button }}</app-button>
         </form>
     </div>
 </section>

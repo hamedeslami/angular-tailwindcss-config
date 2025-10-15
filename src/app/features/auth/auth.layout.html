@@ -17,18 +17,11 @@
                 <div class="flex  flex-col items-center">
                     <img ngSrc="/assets/images/vectors/login-page-vector.svg" alt="Logo" class="mb-4 block" width="600"
                         height="400" decoding="async" priority>
-                    <h2 class="mb-2 text-lg font-semibold text-white">توصیه‌های امنیتی</h2>
+                    <h2 class="mb-2 text-lg font-semibold text-white">{{texts().title}}</h2>
                     <ul class="max-w-md space-y-1 text-gray-400 list-disc list-inside dark:text-gray-400">
-                        <li>
-                            در پایان هر بار استفاده از سامانه حتما از حساب کاربری خود خارج شوید.
-                        </li>
-                        <li>
-                            نام کاربری و رمز عبور شما محرمانه است، از ارسال این اطلاعات به شخص دیگری خودداری کنید.
-                        </li>
-                        <li>
-                            رمز عبور خود را به صورت منظم و در بازه‌های زمانی کوتاه ترجیحا در بازه‌های کمتر از سه ماه
-                            تغییر دهید.
-                        </li>
+                        <li>{{texts()['signOut']}}</li>
+                        <li>{{texts()['notShareInfo']}}</li>
+                        <li>{{texts()['changePassword']}}</li>
                     </ul>
                 </div>
             </div>

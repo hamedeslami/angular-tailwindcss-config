@@ -13,9 +13,9 @@ import { FloatingLabel } from '@shared/components/floating-label/floating-label'
   templateUrl: './login.html',
 })
 export class Login {
+  private textService = inject(AuthTextService);
   readonly loading = signal(false);
   readonly form: FormGroup<ILoginForm>;
-  private textService = inject(AuthTextService);
   readonly texts = this.textService.getTexts('login');
   readonly isLoading = computed(() => this.loading());
 
