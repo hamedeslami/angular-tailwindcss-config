@@ -17,7 +17,7 @@ type AuthTextsByLang = Record<AuthSection, AuthTextKeys>;
 
 export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
     fa: {
-        main:{
+        main: {
             title: 'توصیه‌های امنیتی',
             signOut: 'در پایان هر بار استفاده از سامانه حتما از حساب کاربری خود خارج شوید.',
             notShareInfo: 'نام کاربری و رمز عبور شما محرمانه است، از ارسال این اطلاعات به شخص دیگری خودداری کنید.',
@@ -31,6 +31,8 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
             password: 'رمز عبور',
             button: 'ورود',
             forgotPassword: 'رمز عبور را فراموش کرده‌اید؟',
+            requiredUsername: 'نام کاربری الزامی است.',
+            requiredPassword: 'رمز عبور الزامی می باشد',
             invalidUsername: 'نام کاربری معتبر نمی باشد.',
             invalidPassword: 'رمز عبور معتبر نمی باشد.'
         },
@@ -46,7 +48,7 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
         },
     },
     en: {
-        main:{
+        main: {
             title: 'Security recommendations',
             signOut: 'Be sure to log out of your account at the end of each use of the system.',
             notShareInfo: 'Your username and password are confidential, do not share this information with anyone else.',
@@ -59,6 +61,8 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
             password: 'Password',
             button: 'Login',
             forgotPassword: 'Forgot your password?',
+            requiredUsername: 'Username is required!',
+            requiredPassword: 'Password is required!',
             invalidUsername: 'The username entered is not valid.',
             invalidPassword: 'The password entered is not valid.'
 

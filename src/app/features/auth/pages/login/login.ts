@@ -15,9 +15,10 @@ import { FloatingLabel } from '@shared/components/floating-label/floating-label'
 })
 export class Login {
   private textService = inject(AuthTextService);
+  readonly texts = this.textService.getTexts('login');
   readonly loading = signal(false);
   readonly form: FormGroup<ILoginForm>;
-  readonly texts = this.textService.getTexts('login');
+
   readonly isLoading = computed(() => this.loading());
 
   constructor(
@@ -39,4 +40,21 @@ export class Login {
     this.loading.set(true);
     console.log({ username, password: '••••••' });
   }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.form.get(controlName);
+    if (!control || !control.errors) return '';
+
+    if (control.errors['required']) {
+      return this.texts()[`required${controlName[0].toUpperCase() + controlName.slice(1)}`] ?? '';
+    }
+
+    if (control.errors['pattern']) {
+      return this.texts()[`invalid${controlName[0].toUpperCase() + controlName.slice(1)}`] ?? '';
+    }
+
+    return '';
+  }
+
+
 }

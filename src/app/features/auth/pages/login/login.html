@@ -15,14 +15,14 @@
                 <app-floating-label [label]="texts()['username'] ?? ' '" formControlName="username" [id]="'username'"
                     [required]="true" [inputmode]="'text'" 
                     [error]="form.get('username')?.invalid && form.get('username')?.touched || false"
-                    [errorMessage]="texts()['invalidUsername'] ?? ' '" />
+                    [errorMessage]="getErrorMessage('username')" />
             </div>
 
             <div class="mb-6">
                 <app-floating-label [label]="texts()['password'] ?? ' '" formControlName="password" [id]="'password'"
                     [required]="true" [inputmode]="'text'" [type]="'password'"
                     [error]="form.get('password')?.invalid && form.get('password')?.touched || false"
-                    [errorMessage]="texts()['invalidPassword'] ?? ' '" />
+                    [errorMessage]="getErrorMessage('password')" />
                     <a routerLink="/auth/forgot-password" class="text-xs text-gray-500 dark:text-gray-400 cursor-pointer">{{texts()['forgotPassword']}}</a>
             </div>
 
