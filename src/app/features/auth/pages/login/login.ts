@@ -5,6 +5,7 @@ import { ILoginForm } from '@features/auth/models/login.model';
 import { AuthTextService } from '@features/auth/services/auth-text.service';
 import { Button } from '@shared/components/button/button';
 import { FloatingLabel } from '@shared/components/floating-label/floating-label';
+import { getErrorMessage } from '@shared/utils/get-error-message';
 
 
 @Component({
@@ -41,20 +42,8 @@ export class Login {
     console.log({ username, password: '••••••' });
   }
 
-  getErrorMessage(controlName: string): string {
-    const control = this.form.get(controlName);
-    if (!control || !control.errors) return '';
-
-    if (control.errors['required']) {
-      return this.texts()[`required${controlName[0].toUpperCase() + controlName.slice(1)}`] ?? '';
-    }
-
-    if (control.errors['pattern']) {
-      return this.texts()[`invalid${controlName[0].toUpperCase() + controlName.slice(1)}`] ?? '';
-    }
-
-    return '';
+  getError(controlName: string): string {
+    return getErrorMessage(this.form, controlName, this.texts());
   }
-
 
 }

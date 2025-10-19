@@ -32,7 +32,7 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
             button: 'ورود',
             forgotPassword: 'رمز عبور را فراموش کرده‌اید؟',
             requiredUsername: 'نام کاربری الزامی است.',
-            requiredPassword: 'رمز عبور الزامی می باشد',
+            requiredPassword: 'رمز عبور الزامی می باشد.',
             invalidUsername: 'نام کاربری معتبر نمی باشد.',
             invalidPassword: 'رمز عبور معتبر نمی باشد.'
         },
