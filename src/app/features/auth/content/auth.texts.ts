@@ -43,7 +43,10 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
         },
         verificationCode: {
             title: 'کد تأیید',
-            subtitle: 'کد ارسال‌شده را وارد کنید',
+            subtitlePartOne: 'لطفاً کد یکبار مصرف ارسال شده به',
+            subtitlePartTwo: 'را وارد نمایید.',
+            receiveAgain: 'دریافت مجدد کد تایید از طریق',
+            sms: 'پیامک',
             button: 'تأیید کد',
         },
     },
@@ -74,7 +77,10 @@ export const AUTH_TEXTS: Record<LangCode, AuthTextsByLang> = {
         },
         verificationCode: {
             title: 'Verification Code',
-            subtitle: 'Enter the code you received',
+            subtitlePartOne: 'Please enter the OTP code sent to',
+            subtitlePartTwo: '',
+            receiveAgain: 'Receive verification code again via',
+            sms: 'sms',
             button: 'Verify Code',
         },
     },

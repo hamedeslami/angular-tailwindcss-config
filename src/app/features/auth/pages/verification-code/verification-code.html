@@ -1,10 +1,31 @@
 <section>
     <div class="mb-5 sm:mb-8">
         <h1 class="text-title-sm sm:text-title-md mb-2 font-semibold text-gray-800 dark:text-white/90">
-            کد تایید یکبار مصرف
+            {{ texts().title }}
         </h1>
         <p class="text-sm text-gray-500 dark:text-gray-400">
-            لطفاً کد یکبار مصرف ارسال شده به 09127693903 را وارد نمایید.
+            {{ texts()['subtitlePartOne'] }} <span dir="ltr">09127****03</span> {{ texts()['subtitlePartTwo'] }}
         </p>
+
+        <div class="mt-6 mb-6">
+            <app-pin-code-input [length]="6" (codeCompleted)="onCodeCompleted($event)" (codeCleared)="onCodeCleared()"
+                [startFromRight]="true" [autoFocus]="true" [error]="isError()" [errorMessage]="errorMessage()" />
+        </div>
+
+        <div class="mt-[24px] mb-[24px]">
+            @if(isShowResetMessage()){
+            <div class="flex justify-center items-center gap-2">
+                <p class="text-xs text-center">{{ texts()['receiveAgain'] }}
+                    <span class="text-[#0164BC] cursor-pointer mr-[5px]" (click)="getVerificationCode()">{{
+                        texts()['sms'] }}</span>
+                </p>
+                <img src="assets/images/icons/left-arrow.svg" alt="left arrow icon" />
+            </div>
+            }@else {
+            <app-timer [seconds]="120" (finished)="onTimerDone()"></app-timer>
+            }
+        </div>
+
+        <app-button type="submit">{{ texts().button }}</app-button>
     </div>
 </section>
