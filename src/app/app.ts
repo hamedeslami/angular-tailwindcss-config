@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ToastService } from '@core/services/toast.service';
+import { LangService } from '@core/services/lang.service';
+import { ThemeService } from '@core/services/theme.service';
 import { Toast } from '@shared/components/toast/toast';
 
 @Component({
@@ -12,18 +13,15 @@ import { Toast } from '@shared/components/toast/toast';
 export class App {
   protected title = 'angular-config';
 
+  private themeService = inject(ThemeService);
+  private langService = inject(LangService);
 
-  constructor(private toast: ToastService) { }
-
-  ngOnInit() {
-    this.toast.show('عملیات با موفقیت انجام شد', 'success', 100000000000);
-    this.toast.show('عملیات با موفقیت انجام شد', 'error', 100000000000);
-    this.toast.show('عملیات با موفقیت انجام شد', 'warning', 100000000000);
-    this.toast.show('عملیات با موفقیت انجام شد', 'info', 100000000000);
-
-
-
+  constructor() { 
+    this.themeService.initializeTheme();
   }
 
-
+  readonly toastPostion = computed(() => {
+    const lang = this.langService.currentLang;
+    return lang === 'fa' ? 'top-right' : 'top-left';
+  });
 }
