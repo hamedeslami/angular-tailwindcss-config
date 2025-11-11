@@ -9,7 +9,7 @@ import { TokenService } from './token.service';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {}
+  constructor(private http: HttpClient, private tokenService: TokenService) { }
 
   saveAccessToken(token: string): void {
     this.tokenService.setAccessToken(token);
@@ -33,6 +33,11 @@ export class AuthService {
       refresh_token: refreshToken
     });
   }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('access_token');
+  }
+
 
   logout(): void {
     this.tokenService.clearTokens();
