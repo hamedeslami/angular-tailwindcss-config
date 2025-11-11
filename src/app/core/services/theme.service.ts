@@ -11,6 +11,7 @@ export class ThemeService {
 
     constructor() {
         this.initializeTheme();
+        window.addEventListener('storage', this.handleStorageChange);
         effect(() => {
             const isDark = this.isDark();
             this.applyTheme(isDark);
@@ -18,7 +19,7 @@ export class ThemeService {
         });
     }
 
-    private initializeTheme(): void {
+    initializeTheme(): void {
         const savedTheme = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -42,6 +43,13 @@ export class ThemeService {
     private saveThemePreference(isDark: boolean): void {
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     }
+
+    private handleStorageChange = (event: StorageEvent): void => {
+        if (event.key === 'theme') {
+            const newTheme = event.newValue === 'dark';
+            this.isDark.set(newTheme);
+        }
+    };
 
     toggleTheme(): void {
         this.isDark.update(value => !value);
