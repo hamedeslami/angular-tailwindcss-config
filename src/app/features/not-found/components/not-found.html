@@ -1,0 +1,10 @@
+<main class="h-screen w-full flex flex-row justify-center items-center bg-white px-6 py-24 sm:py-32 lg:px-8 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center text-center">
+    <img src="assets/images/icons/alert.svg" class="h-100 w-100" alt="no access icon"/>
+    <h1 class="mt-10 text-3xl font-semibold tracking-tight text-balance text-gray-900 dark:text-white">{{ texts()['title'] }}</h1>
+    <p class=" text-lg font-medium text-pretty text-gray-500 sm:text-xl/8">{{ texts()['description'] }}</p>
+    <div class="mt-10 flex items-center justify-center gap-x-6">
+        <app-button (click)="gotHomePage()">{{ texts()['button'] }}</app-button>
+    </div>
+  </div>
+</main>
