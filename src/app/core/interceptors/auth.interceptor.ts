@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap } from 'rxjs/operators';
 import { TokenService } from '@core/services/token.service';
 import { AuthService } from '@core/services/auth.service';
-import { ToastService } from '@core/services/toast.service';
 import { ErrorHandlerService } from '@core/services/error-handler.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -15,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private toastService: ToastService,
     private errorHandler: ErrorHandlerService
   ) { }
 
