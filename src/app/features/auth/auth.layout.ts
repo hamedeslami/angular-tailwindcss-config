@@ -2,7 +2,8 @@ import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ThemeToggle } from '@shared/components/theme-toggle/theme-toggle';
-import { AuthTextService } from './services/auth-text.service';
+import { TextService } from '@core/services/text.service';
+import { AUTH_TEXTS } from './content/auth.texts';
 
 @Component({
   selector: 'app-auth-layout',
@@ -12,6 +13,6 @@ import { AuthTextService } from './services/auth-text.service';
   templateUrl: './auth.layout.html'
 })
 export class AuthLayout {
-  private textService = inject(AuthTextService);
-  readonly texts = this.textService.getTexts('main');
+  private textService = inject(TextService);
+  readonly texts = this.textService.getTexts(AUTH_TEXTS, 'main');
 }
