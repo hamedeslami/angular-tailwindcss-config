@@ -1,5 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { AuthTextService } from '@features/auth/services/auth-text.service';
+import { TextService } from '@core/services/text.service';
+import { AUTH_TEXTS } from '@features/auth/content/auth.texts';
 import { Button } from '@shared/components/button/button';
 import { PinCodeInput } from '@shared/components/pin-code-input/pin-code-input';
 import { Timer } from '@shared/components/timer/timer';
@@ -11,8 +12,8 @@ import { Timer } from '@shared/components/timer/timer';
   templateUrl: './verification-code.html',
 })
 export class VerificationCode {
-  private textService = inject(AuthTextService);
-  readonly texts = this.textService.getTexts('verificationCode');
+  private textService = inject(TextService);
+  readonly texts = this.textService.getTexts(AUTH_TEXTS, 'verificationCode');
 
   pinCompleted: string = '';
   isShowResetMessage = signal<boolean>(false);

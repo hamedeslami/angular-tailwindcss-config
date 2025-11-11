@@ -1,8 +1,9 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { TextService } from '@core/services/text.service';
+import { AUTH_TEXTS } from '@features/auth/content/auth.texts';
 import { ILoginForm } from '@features/auth/models/login.model';
-import { AuthTextService } from '@features/auth/services/auth-text.service';
 import { Button } from '@shared/components/button/button';
 import { FloatingLabel } from '@shared/components/floating-label/floating-label';
 import { getErrorMessage } from '@shared/utils/get-error-message';
@@ -15,8 +16,9 @@ import { getErrorMessage } from '@shared/utils/get-error-message';
   templateUrl: './login.html',
 })
 export class Login {
-  private textService = inject(AuthTextService);
-  readonly texts = this.textService.getTexts('login');
+  private textService = inject(TextService);
+  readonly texts = this.textService.getTexts(AUTH_TEXTS, 'login');
+
   readonly loading = signal(false);
   readonly form: FormGroup<ILoginForm>;
 
