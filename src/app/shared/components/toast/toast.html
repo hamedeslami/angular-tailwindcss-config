@@ -1,6 +1,6 @@
 <div class="fixed space-y-3 z-50" [ngClass]="getPositionClasses()">
     @for (toast of toasts; track toast.id){
-    <div class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 animate-fade-in"
+    <div class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-sm border border-gray-100 dark:border-gray-700 dark:text-gray-400 dark:bg-gray-800 animate-fade-in"
         role="alert">
         <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 rounded-lg"
             [ngClass]="getColorClasses(toast.type)" [innerHTML]="getIcon(toast.type)">
@@ -18,5 +18,4 @@
         </button>
     </div>
     }
-
 </div>
