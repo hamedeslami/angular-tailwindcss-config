@@ -14,6 +14,12 @@ export const routes: Routes = [
             import('./features/auth/auth.routes').then(m => m.AUTH_ROUTES),
     },
     {
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+            import('./features/dashboard/dashboard.routes').then(m => m.DASHBOARD_ROUTES),
+    },
+    {
         path: 'no-access',
         loadChildren: () =>
             import('./features/no-access/no-access.routes').then(m => m.NO_ACCESS_ROUTES),
