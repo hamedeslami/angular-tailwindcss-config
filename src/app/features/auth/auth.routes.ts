@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { AuthLayout } from './auth.layout';
 import { withLangTitle } from '@shared/utils/with-lang-title';
 import { AUTH_TEXTS } from './content/auth.texts';
+import { AuthLayout } from './layout/auth.layout';
 
 export const AUTH_ROUTES: Routes = [
     {
