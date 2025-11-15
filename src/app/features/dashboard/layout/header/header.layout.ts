@@ -1,17 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { SidebarService } from '@features/dashboard/services/sidebar.service';
-import { ThemeToggleButton } from './components/theme-toggle-button';
+import { ThemeToggleButton } from './components/theme-toggle-button/theme-toggle-button';
+import { NotificationDropdown } from './components/notification-dropdown/notification-dropdown';
+import { UserDropdown } from './components/user-dropdown/user-dropdown';
+import { TextService } from '@core/services/text.service';
+import { LAYOUT_TEXTS } from '@features/dashboard/content/layout.text';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, ThemeToggleButton],
+  imports: [CommonModule, ThemeToggleButton, NotificationDropdown, UserDropdown],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.layout.html'
 })
 export class HeaderLayout {
+  private textService = inject(TextService);
+  readonly texts = this.textService.getTexts(LAYOUT_TEXTS, 'search');
+
   isApplicationMenuOpen = false;
   readonly isMobileOpen$;
 
