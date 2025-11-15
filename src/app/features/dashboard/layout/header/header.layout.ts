@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { SidebarService } from '@features/dashboard/services/sidebar.service';
+import { ThemeToggleButton } from './components/theme-toggle-button';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ThemeToggleButton],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './header.layout.html'
 })
