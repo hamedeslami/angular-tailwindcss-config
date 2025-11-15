@@ -47,3 +47,94 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
+
+
+
+@utility menu-item {
+  @apply relative flex items-center w-full gap-3 px-3 py-2 font-medium rounded-lg text-sm;
+}
+
+@utility menu-item-active {
+  @apply bg-gray-50 text-blue-950 dark:bg-gray-500/[0.12] dark:text-gray-400;
+}
+
+@utility menu-item-inactive {
+  @apply text-white hover:bg-gray-100 hover:text-blue-950 group-hover:text-blue-950 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+}
+
+@utility menu-item-icon {
+  @apply text-white group-hover:text-gray-700 dark:text-gray-400;
+}
+
+@utility menu-item-icon-active {
+  @apply text-blue-950 dark:text-gray-400;
+}
+
+@utility menu-item-icon-size {
+  & svg {
+    @apply !size-6;
+  }
+}
+
+@utility menu-item-icon-inactive {
+  @apply text-white group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
+}
+
+@utility menu-item-arrow {
+  @apply relative;
+}
+
+@utility menu-item-arrow-active {
+  @apply rotate-180 text-blue-950 dark:text-gray-400;
+}
+
+@utility menu-item-arrow-inactive {
+  @apply text-gray-500 group-hover:text-gray-700 dark:text-gray-400 dark:group-hover:text-gray-300;
+}
+
+@utility menu-dropdown-item {
+  @apply relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium;
+}
+@utility menu-dropdown-item-active {
+  @apply bg-gray-50 text-blue-950 dark:bg-gray-500/[0.12] dark:text-gray-400;
+}
+
+@utility menu-dropdown-item-inactive {
+  @apply text-white hover:bg-gray-100 hover:text-blue-950 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+}
+
+@utility menu-dropdown-badge {
+  @apply text-green-600 dark:text-green-500 block rounded-full px-2.5 py-0.5 text-xs font-medium uppercase;
+}
+
+@utility menu-dropdown-badge-active {
+  @apply bg-green-100 dark:bg-green-500/20;
+}
+
+@utility menu-dropdown-badge-inactive {
+  @apply bg-green-50 group-hover:bg-green-100 dark:bg-green-500/15 dark:group-hover:bg-green-500/20;
+}
+
+
+
+@utility no-scrollbar {
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    @apply size-1.5;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full dark:bg-gray-700;
+  }
+}
