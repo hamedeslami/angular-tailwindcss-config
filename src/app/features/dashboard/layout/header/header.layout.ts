@@ -19,6 +19,8 @@ export class HeaderLayout {
   private textService = inject(TextService);
   readonly texts = this.textService.getTexts(LAYOUT_TEXTS, 'search');
 
+  private platform = navigator.platform.toLowerCase();
+
   isApplicationMenuOpen = false;
   readonly isMobileOpen$;
 
@@ -54,4 +56,14 @@ export class HeaderLayout {
       this.searchInput?.nativeElement.focus();
     }
   };
+
+  get getPlatform() {
+    if (this.platform.includes('win')) {
+      return 'ctrl+k'
+    } else if (this.platform.includes('mac')) {
+      return '⌘+k'
+    } else {
+      return ''
+    }
+  }
 }
