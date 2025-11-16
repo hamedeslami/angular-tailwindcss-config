@@ -36,10 +36,14 @@
         }
       </button>
       <a routerLink="/" class="xl:hidden">
-        <img class="dark:hidden" src="https://portal.kardan.ir/static/newui/login_img/mainLogo2.png" alt="Logo" />
         <img
-          class="hidden dark:block"
-          src="https://portal.kardan.ir/static/newui/login_img/mainLogo2.png"
+          class="dark:hidden w-[150px]"
+          src="assets/images/logos/lockup_angular.svg"
+          alt="Logo"
+        />
+        <img
+          class="hidden dark:block w-[150px]"
+          src="assets/images/logos/lockup_angular_wht.svg"
           alt="Logo"
         />
       </a>
@@ -98,11 +102,11 @@
       class="items-center justify-between w-full gap-4 px-5 py-4 xl:flex shadow-theme-md xl:justify-end xl:px-0 xl:shadow-none"
     >
       <div class="flex items-center gap-2 2xsm:gap-3">
-        <app-theme-toggle-button/>
+        <app-theme-toggle-button />
 
-        <app-notification-dropdown/>
+        <app-notification-dropdown />
       </div>
-      <app-user-dropdown/>
+      <app-user-dropdown />
     </div>
   </div>
 </header>
