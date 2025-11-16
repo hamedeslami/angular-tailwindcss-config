@@ -69,9 +69,9 @@ export class HeaderLayout {
 
   get getPlatform() {
     if (this.platform.includes('win')) {
-      return 'ctrl+k';
+      return 'Ctrl+K';
     } else if (this.platform.includes('mac')) {
-      return '⌘+k';
+      return '⌘ K';
     } else {
       return '';
     }
