@@ -1,6 +1,6 @@
 <button aria-label="button" [ngClass]="{
     'w-full flex gap-1 md:gap-2 py-[12px] px-[16px] rounded-lg text-sm text-center justify-center items-center whitespace-nowrap': true,
-    'bg-[#0164BC] text-white hover:bg-blue-50': variant() === 'contained',
+    'bg-[var(--sidebar-bg)] text-white hover:bg-blue-50': variant() === 'contained',
     'text-sky-700 outline-1 outline-offset-0 outline-[#0164BC] bg-white hover:bg-blue-50 ': variant() === 'outline',
     'text-[#0164BC] hover:text-blue-900': variant() === 'text',
     'opacity-50 cursor-not-allowed': disabled(),

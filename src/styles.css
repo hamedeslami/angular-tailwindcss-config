@@ -19,6 +19,36 @@
   font-display: swap;
 }
 
+:root {
+   --sidebar-blue-light: #162556;
+  --sidebar-red-light: #9f0712;
+  --sidebar-orange-light: #ca3500;
+  --sidebar-yellow-light: #f0b100;
+  --sidebar-green-light: #016630;
+  --sidebar-black-light: #0a0a0a;
+  --sidebar-gray-light: #1f1f1f;
+  --sidebar-cyan-light: #007595;
+  --sidebar-sky-light: #0069a8;
+  --sidebar-purple-light: #6e11b0;
+  --sidebar-pink-light: #c6005c;
+  --sidebar-rose-light: #c70036;
+
+  --sidebar-blue-dark: #0f172a;
+  --sidebar-red-dark: #4c0a0a;
+  --sidebar-orange-dark: #4a1d00;
+  --sidebar-yellow-dark: #4a3b00;
+  --sidebar-green-dark: #00361d;
+  --sidebar-black-dark: #000000;
+  --sidebar-gray-dark: #0f0f0f;
+  --sidebar-cyan-dark: #003c4b;
+  --sidebar-sky-dark: #0a2435;
+  --sidebar-purple-dark: #2b0a45;
+  --sidebar-pink-dark: #4a0823;
+  --sidebar-rose-dark: #430012;
+
+  --sidebar-bg: var(--sidebar-blue-light);
+}
+
 .no-bg-transition {
   transition-property: color, transform;
 }
