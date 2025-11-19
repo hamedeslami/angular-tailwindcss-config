@@ -1,14 +1,13 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, effect, inject, OnDestroy } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { inject } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class ThemeService {
+export class ThemeService implements OnDestroy {
   private document = inject(DOCUMENT);
 
   isDark = signal<boolean>(false);
-  sidebarColor = signal<string>('blue'); 
-  
+  sidebarColor = signal<string>('blue');
+
   constructor() {
     this.initializeTheme();
     this.initializeSidebarColor();
@@ -16,16 +15,18 @@ export class ThemeService {
     window.addEventListener('storage', this.handleStorageChange);
 
     effect(() => {
-      this.applyTheme(this.isDark());
-      this.saveThemePreference(this.isDark());
-      this.reapplySidebarColor();
+      const isDark = this.isDark();
+      const sidebarColor = this.sidebarColor();
+      
+      this.applyTheme(isDark);
+      this.saveThemePreference(isDark);
+      this.applySidebarColor(sidebarColor, isDark);
+      this.saveSidebarColor(sidebarColor);
     });
+  }
 
-    effect(() => {
-      this.applySidebarColor(this.sidebarColor());
-      this.saveSidebarColor(this.sidebarColor());
-      this.reapplySidebarColor();
-    });
+  ngOnDestroy(): void {
+    window.removeEventListener('storage', this.handleStorageChange);
   }
 
   private initializeTheme(): void {
@@ -59,9 +60,15 @@ export class ThemeService {
     }
   }
 
-  private applySidebarColor(color: string): void {
-    const html = this.document.documentElement;
-    html.style.setProperty('--sidebar-bg', color);
+  private applySidebarColor(color: string, isDark: boolean): void {
+    const name = color.toLowerCase();
+    const root = this.document.documentElement;
+    
+    const variable = isDark
+      ? `var(--sidebar-${name}-dark)`
+      : `var(--sidebar-${name}-light)`;
+
+    root.style.setProperty('--sidebar-bg', variable);
   }
 
   private saveSidebarColor(color: string): void {
@@ -70,18 +77,6 @@ export class ThemeService {
 
   setSidebarColor(color: string): void {
     this.sidebarColor.set(color);
-  }
-
-  private reapplySidebarColor() {
-    const name = this.sidebarColor().toLowerCase();
-    const isDark = this.isDark();
-    const root = this.document.documentElement;
-
-    const variable = isDark
-      ? `var(--sidebar-${name}-dark)`
-      : `var(--sidebar-${name}-light)`;
-
-    root.style.setProperty('--sidebar-bg', variable);
   }
 
   private handleStorageChange = (event: StorageEvent): void => {
