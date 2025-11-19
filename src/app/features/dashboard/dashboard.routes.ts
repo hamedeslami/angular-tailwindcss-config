@@ -13,6 +13,12 @@ export const DASHBOARD_ROUTES: Routes = [
                 loadComponent: () =>
                     import('./pages/home/home').then(m => m.Home),
             },
+            {
+                path: 'users',
+                // title: withLangTitle(AUTH_TEXTS, 'login'),
+                loadComponent: () =>
+                    import('./pages/users/users').then(m => m.Users),
+            }
         ],
     },
 ];
