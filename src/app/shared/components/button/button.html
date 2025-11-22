@@ -1,8 +1,9 @@
-<button aria-label="button" [ngClass]="{
+<button aria-label="button"
+   [ngClass]="{
     'w-full flex gap-1 md:gap-2 py-[12px] px-[16px] rounded-lg text-sm text-center justify-center items-center whitespace-nowrap': true,
-    'bg-[var(--sidebar-bg)] text-white hover:bg-blue-50': variant() === 'contained',
-    'text-sky-700 outline-1 outline-offset-0 outline-[#0164BC] bg-white hover:bg-blue-50 ': variant() === 'outline',
-    'text-[#0164BC] hover:text-blue-900': variant() === 'text',
+    'bg-[var(--sidebar-bg)] text-white dark:outline-1 dark:outline-offset-0 dark:outline-gray-700': variant() === 'contained',
+    '!text-[var(--sidebar-bg)] outline-1 outline-offset-0 outline-[var(--sidebar-bg)] bg-transparent dark:!text-white dark:outline-white/[0.05]': variant() === 'outline',
+    'text-[var(--sidebar-bg)]': variant() === 'text',
     'opacity-50 cursor-not-allowed': disabled(),
     'cursor-pointer': !disabled()
   }" [disabled]="disabled()" (click)="handleClick($event)">
@@ -13,5 +14,5 @@
   @if(loading()){
   <app-spinner />
   }
-  <span><ng-content /></span>
+  <div [class]="className()"><ng-content /></div>
 </button>
