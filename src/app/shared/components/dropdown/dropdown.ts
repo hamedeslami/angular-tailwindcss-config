@@ -26,7 +26,7 @@ export class Dropdown implements AfterViewInit, OnDestroy {
   };
 
   get baseClasses(): string {
-    return 'absolute z-40 mt-2 rounded-xl border border-gray-200 bg-white shadow-theme-lg dark:border-gray-800 dark:bg-gray-900';
+    return 'absolute z-40 mt-2 rounded-xl border border-gray-200 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900';
   }
 
   ngAfterViewInit() {
