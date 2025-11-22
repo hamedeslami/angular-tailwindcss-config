@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input, output } from '@angular/core';
+import { Component, ElementRef, HostListener, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -8,18 +8,42 @@ import { Component, input, output } from '@angular/core';
 })
 export class Modal {
   isOpen = input<boolean>(false);
-  isHeader = input<boolean>(false);
-  isFooter = input<boolean>(false);
   title = input<string>('');
-  size = input<'sm' | 'md' | 'lg' | 'xl' | '2xl' | '2xlg'>('sm');
-  variant = input<'normal' | 'success' | 'error'>('normal');
+  size = input<'sm' | 'md' | 'lg' | 'xl' | '2xl' | '4xl'>('sm');
+  className = input<string>('');
+  showCloseButton = input<boolean>(true);
   close = output<void>();
 
-  onClose() {
+
+
+  constructor(private el: ElementRef) { }
+
+  ngOnInit() {
+    if (this.isOpen()) {
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  ngOnDestroy() {
+    document.body.style.overflow = 'unset';
+  }
+
+  ngOnChanges() {
+    document.body.style.overflow = this.isOpen() ? 'hidden' : 'unset';
+  }
+
+  onBackdropClick(event: MouseEvent) {
     this.close.emit();
   }
 
-  preventClose(event: MouseEvent) {
+  onContentClick(event: MouseEvent) {
     event.stopPropagation();
+  }
+
+  @HostListener('document:keydown.escape', ['$event']) onEscape(event: Event) {
+    const keyboardEvent = event as KeyboardEvent;
+    if (this.isOpen()) {
+      this.close.emit();
+    }
   }
 }
