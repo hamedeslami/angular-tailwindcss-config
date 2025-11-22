@@ -9,7 +9,7 @@
         <tr>
           @if(selectable()){
           <th
-            class="px-6 py-3 font-medium text-gray-500 sm:px-6 text-theme-xs dark:text-gray-400 text-start"
+            class="px-6 py-3 font-medium text-gray-500 sm:px-6 text-xs dark:text-gray-400 text-start"
           >
             <div class="flex items-center gap-3">
               <div>
@@ -22,7 +22,7 @@
           </th>
           } @for (col of columns(); track col.key){
           <th
-            class="px-6 py-3 font-medium text-gray-500 sm:px-6 text-theme-xs dark:text-gray-400 text-start"
+            class="px-6 py-3 font-medium text-gray-500 sm:px-6 text-xs dark:text-gray-400 text-start"
           >
             {{ col.label }}
           </th>
