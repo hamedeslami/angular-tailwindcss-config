@@ -16,9 +16,9 @@ export class AvatarText {
     return nameValue
       .split(' ')
       .map((word) => word[0])
-      .join('')
+      .join(' ')
       .toUpperCase()
-      .slice(0, 2);
+      .slice(0, 3);
   });
 
   colorClass = computed(() => {
