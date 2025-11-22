@@ -1,3 +1,69 @@
+<div class="flex mt-6 mb-6 justify-between">
+  <div>
+    <app-button (click)="openModal()" [className]="`flex flex-row items-center justify-center gap-3`">
+      <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+        fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M5 12h14m-7 7V5" />
+      </svg>
+
+      <span>افزودن کاربر جدید</span>
+    </app-button>
+  </div>
+  <div class="flex gap-4 items-center justify-center">
+    <div class="relative">
+      <div
+        class="flex flex-row items-center justify-center gap-1 text-sm py-[12px] px-[8px] font-medium text-center text-gray-700 cursor-pointer bg-white border border-gray-300 rounded-lg hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700"
+        (click)="toggleDropdown()">
+        <svg class="fill-current" width="20" height="20" viewBox="0 0 20 20" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12.0826 4.0835C11.0769 4.0835 10.2617 4.89871 10.2617 5.90433C10.2617 6.90995 11.0769 7.72516 12.0826 7.72516C13.0882 7.72516 13.9034 6.90995 13.9034 5.90433C13.9034 4.89871 13.0882 4.0835 12.0826 4.0835ZM2.29004 6.65409H8.84671C9.18662 8.12703 10.5063 9.22516 12.0826 9.22516C13.6588 9.22516 14.9785 8.12703 15.3184 6.65409H17.7067C18.1209 6.65409 18.4567 6.31831 18.4567 5.90409C18.4567 5.48988 18.1209 5.15409 17.7067 5.15409H15.3183C14.9782 3.68139 13.6586 2.5835 12.0826 2.5835C10.5065 2.5835 9.18691 3.68139 8.84682 5.15409H2.29004C1.87583 5.15409 1.54004 5.48988 1.54004 5.90409C1.54004 6.31831 1.87583 6.65409 2.29004 6.65409ZM4.6816 13.3462H2.29085C1.87664 13.3462 1.54085 13.682 1.54085 14.0962C1.54085 14.5104 1.87664 14.8462 2.29085 14.8462H4.68172C5.02181 16.3189 6.34142 17.4168 7.91745 17.4168C9.49348 17.4168 10.8131 16.3189 11.1532 14.8462H17.7075C18.1217 14.8462 18.4575 14.5104 18.4575 14.0962C18.4575 13.682 18.1217 13.3462 17.7075 13.3462H11.1533C10.8134 11.8733 9.49366 10.7752 7.91745 10.7752C6.34124 10.7752 5.02151 11.8733 4.6816 13.3462ZM9.73828 14.096C9.73828 13.0904 8.92307 12.2752 7.91745 12.2752C6.91183 12.2752 6.09662 13.0904 6.09662 14.096C6.09662 15.1016 6.91183 15.9168 7.91745 15.9168C8.92307 15.9168 9.73828 15.1016 9.73828 14.096Z"
+            fill=""></path>
+        </svg>
+        <span class="text-gray-700 dark:text-gray-400"> فیلتر</span>
+      </div>
+      <app-dropdown [isOpen]="isDropdownOpen"
+        className="absolute  flex flex-col min-w-xs rtl:right-0 ltr:left-0 rounded-2xl border border-gray-200 bg-white p-3 shadow-lg dark:border-gray-800 dark:bg-gray-dark">
+        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="dropdownBgHoverButton">
+
+          <li class="flex justify-start items-center gap-4 mb-4">
+            <app-checkbox />
+            <p class="-mt-0.5 text-sm text-gray-800 dark:text-white/90">مدیر</p>
+          </li>
+
+          <li class="flex justify-start items-center gap-4 mb-4">
+            <app-checkbox />
+            <p class="-mt-0.5 text-sm text-gray-800 dark:text-white/90">اپراتور</p>
+          </li>
+
+          <li class="flex justify-start items-center gap-4 mb-4">
+            <app-checkbox />
+            <p class="-mt-0.5 text-sm text-gray-800 dark:text-white/90">عادی</p>
+          </li>
+
+        </ul>
+        <!-- <app-button>اعمال تغییرات</app-button> -->
+      </app-dropdown>
+    </div>
+    <div class="relative">
+      <span class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2">
+        <svg class="fill-gray-500 dark:fill-gray-400" width="20" height="20" viewBox="0 0 20 20" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M3.04199 9.37381C3.04199 5.87712 5.87735 3.04218 9.37533 3.04218C12.8733 3.04218 15.7087 5.87712 15.7087 9.37381C15.7087 12.8705 12.8733 15.7055 9.37533 15.7055C5.87735 15.7055 3.04199 12.8705 3.04199 9.37381ZM9.37533 1.54218C5.04926 1.54218 1.54199 5.04835 1.54199 9.37381C1.54199 13.6993 5.04926 17.2055 9.37533 17.2055C11.2676 17.2055 13.0032 16.5346 14.3572 15.4178L17.1773 18.2381C17.4702 18.531 17.945 18.5311 18.2379 18.2382C18.5308 17.9453 18.5309 17.4704 18.238 17.1775L15.4182 14.3575C16.5367 13.0035 17.2087 11.2671 17.2087 9.37381C17.2087 5.04835 13.7014 1.54218 9.37533 1.54218Z"
+            fill=""></path>
+        </svg>
+      </span>
+      <input type="text" placeholder="جستجو کاربر ..."
+        class="dark:bg-dark-900 shadow-xs focus:border-blue-300 focus:ring-blue-500/10 dark:focus:border-blue-800 h-[50px] w-full rounded-lg border border-gray-300 bg-transparent py-2.5 pr-4 pl-[42px] text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden xl:w-[300px] dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
+    </div>
+  </div>
+
+</div>
+
+
+
 <ng-template #userTemplate let-row>
   <div class="flex items-center gap-3">
     <app-avatar-text [name]="row.user.name" class="w-10 h-10" />
@@ -44,9 +110,9 @@
 <app-pagination></app-pagination>
 
 
-<app-modal [isOpen]="isOpen" (close)="closeModal()" className="max-w-[700px] p-6 lg:p-10" [size]="'4xl'">
+<app-modal [isOpen]="isModalOpen" (close)="closeModal()" className="max-w-[700px] p-6 lg:p-10" [size]="'4xl'">
   <div>
-    <h5 class="mb-2 font-semibold text-gray-800 modal-title text-theme-xl dark:text-white/90 lg:text-2xl">
+    <h5 class="mb-2 font-semibold text-gray-800 modal-title text-xl dark:text-white/90 lg:text-2xl">
       Plan
     </h5>
     <p class="text-sm text-gray-500 dark:text-gray-400">

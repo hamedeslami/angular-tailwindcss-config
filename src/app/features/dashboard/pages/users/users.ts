@@ -6,17 +6,21 @@ import {
 import { columns, users } from '@features/dashboard/data/users-items.data';
 import { AvatarText } from '@shared/components/avatar/avatar-text/avatar-text';
 import { Badge } from '@shared/components/badge/badge';
+import { Button } from '@shared/components/button/button';
+import { Checkbox } from '@shared/components/checkbox/checkbox';
+import { Dropdown } from '@shared/components/dropdown/dropdown';
 import { Modal } from '@shared/components/modal/modal';
 import { Pagination } from '@shared/components/pagination/pagination';
 import { Table } from '@shared/components/table/table';
 
 @Component({
   selector: 'app-users',
-  imports: [Table, Badge, AvatarText, Modal, Pagination],
+  imports: [Table, Badge, AvatarText, Modal, Pagination, Button, Dropdown, Checkbox],
   templateUrl: './users.html',
 })
 export class Users {
-  isOpen = false;
+  isModalOpen = false;
+  isDropdownOpen = false;
   usersList = users;
   userListCol = columns
 
@@ -42,10 +46,18 @@ export class Users {
   }
 
   openModal() {
-    this.isOpen = true;
+    this.isModalOpen = true;
   }
 
   closeModal() {
-    this.isOpen = false;
+    this.isModalOpen = false;
+  }
+
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  closeDropdown() {
+    this.isDropdownOpen = false;
   }
 }
