@@ -1,3 +1,5 @@
+import { FilterConfig } from "@shared/components/table/types/filter.types";
+
 export const users = [
     {
         id: 'DE124321',
@@ -162,11 +164,48 @@ export const users = [
 ];
 
 export const columns = [
-      { key: 'id', label: 'Deal ID' },
-      { key: 'user', label: 'Customer', templateName: 'userTemplate' },
-      { key: 'product.name', label: 'Product/Service' },
-      { key: 'product.price', label: 'Deal Value' },
-      { key: 'product.purchaseDate', label: 'Close Date' },
-      { key: 'status', label: 'Status', templateName: 'statusTemplate' },
-      { key: 'actions', label: 'Actions', templateName: 'actionTemplate' },
-    ];
+    { key: 'id', label: 'شناسه' },
+    { key: 'user', label: 'مشتری', templateName: 'userTemplate' },
+    { key: 'product.name', label: 'محصول/ سرویس' },
+    { key: 'product.price', label: 'ارزش' },
+    { key: 'product.purchaseDate', label: 'زمان پایان' },
+    { key: 'status.type', label: 'وضعیت', templateName: 'statusTemplate' },
+    { key: 'actions', label: 'عملیات', templateName: 'actionTemplate' },
+];
+
+
+export const filterConfigs: FilterConfig[] = [
+    {
+      key: 'product.name',
+      label: 'Product/Service',
+      type: 'select',
+      options: [
+        { value: 'Software License', label: 'Software License' },
+        { value: 'Cloud Hosting', label: 'Cloud Hosting' },
+        { value: 'Web Domain', label: 'Web Domain' },
+        { value: 'SSL Certificate', label: 'SSL Certificate' },
+        { value: 'Premium Support', label: 'Premium Support' }
+      ]
+    },
+    {
+      key: 'status.type',
+      label: 'Status',
+      type: 'select',
+      options: [
+        { value: 'Complete', label: 'فعال' },
+        { value: 'Pending', label: 'معلق' },
+        { value: 'Cancel', label: 'غیرفعال' }
+      ]
+    },
+    {
+      key: 'product.price',
+      label: 'Deal Value',
+      sortable: true,
+      type: 'text'
+    },
+    {
+      key: 'product.purchaseDate',
+      label: 'Close Date',
+      type: 'date'
+    }
+  ];
