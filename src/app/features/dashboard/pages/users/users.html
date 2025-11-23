@@ -106,7 +106,8 @@
   </div>
 </ng-template>
 
-<app-table [data]="usersList" [columns]="userListCol" [templateMap]="templateMap" [selectable]="true" />
+<app-table [data]="usersList" [columns]="userListCol" [templateMap]="templateMap" [selectable]="true"
+  [filters]="filterConfigs" (filterChanged)="onFilterChange($event)" />
 <app-pagination></app-pagination>
 
 
