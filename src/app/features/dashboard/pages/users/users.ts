@@ -3,11 +3,13 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { columns, filterConfigs, users } from '@features/dashboard/data/users-items.data';
 import { AvatarText } from '@shared/components/avatar/avatar-text/avatar-text';
 import { Badge } from '@shared/components/badge/badge';
 import { Button } from '@shared/components/button/button';
 import { Checkbox } from '@shared/components/checkbox/checkbox';
+import { DateTimePicker } from '@shared/components/date-time-picker/date-time-picker';
 import { Dropdown } from '@shared/components/dropdown/dropdown';
 import { Modal } from '@shared/components/modal/modal';
 import { Pagination } from '@shared/components/pagination/pagination';
@@ -16,7 +18,7 @@ import { FilterState } from '@shared/components/table/types/filter.types';
 
 @Component({
   selector: 'app-users',
-  imports: [Table, Badge, AvatarText, Modal, Pagination, Button, Dropdown, Checkbox],
+  imports: [Table, Badge, AvatarText, Modal, Pagination, Button, Dropdown, Checkbox, DateTimePicker, FormsModule],
   templateUrl: './users.html',
 })
 export class Users {
@@ -74,5 +76,15 @@ export class Users {
       value: filter.value,
       operator: filter.operator || 'equals'
     }));
+  }
+
+selectedDate: Date | null = null;
+  selectedTime: Date | null = null;
+  selectedDateTime: Date | null = null;
+
+  // Optional: Add event handler if you need it
+  onDateTimeChange(date: Date | null): void {
+    console.log('Date/time changed:', date);
+    // Add your custom logic here
   }
 }

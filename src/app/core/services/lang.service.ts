@@ -1,5 +1,4 @@
 import { Injectable, signal, computed } from '@angular/core';
-
 export type LangCode = 'fa' | 'en';
 
 @Injectable({ providedIn: 'root' })
@@ -35,4 +34,9 @@ export class LangService {
   get currentLang() {
     return this._lang();
   }
+
+  readonly calendarType = computed(() =>
+    this._lang() === 'fa' ? 'jalali' : 'gregorian'
+  );
+
 }

@@ -121,3 +121,48 @@
     </p>
   </div>
 </app-modal>
+
+
+
+<div class="p-6 space-y-6">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Date Time Picker Demo</h2>
+  
+  <!-- Date Picker Only -->
+  <div class="mb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select date</label>
+    <app-date-time-picker 
+      mode="date" 
+      placeholder="Select date"
+      [(ngModel)]="selectedDate">
+    </app-date-time-picker>
+  </div>
+
+  <!-- Time Picker Only -->
+  <div class="mb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select time</label>
+    <app-date-time-picker 
+      mode="time" 
+      placeholder="Select time"
+      [(ngModel)]="selectedTime">
+    </app-date-time-picker>
+  </div>
+
+  <!-- Both Date and Time -->
+  <div class="mb-4">
+    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select date and time</label>
+    <app-date-time-picker 
+      mode="both" 
+      placeholder="Select date and time"
+      [(ngModel)]="selectedDateTime"
+      (dateTimeChange)="onDateTimeChange($event)">
+    </app-date-time-picker>
+  </div>
+
+  <!-- Display selected values (optional) -->
+  <div class="mt-6 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+    <h3 class="text-lg font-semibold mb-2 text-gray-900 dark:text-white">Selected Values:</h3>
+    <p class="text-gray-700 dark:text-gray-300">Date Only: {{ selectedDate}}</p>
+    <p class="text-gray-700 dark:text-gray-300">Time Only: {{ selectedTime}}</p>
+    <p class="text-gray-700 dark:text-gray-300">Date & Time: {{ selectedDateTime }}</p>
+  </div>
+</div>
