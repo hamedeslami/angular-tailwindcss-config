@@ -1,337 +1,136 @@
 <div class="relative" #pickerContainer>
-    <!-- Input Field -->
-    <div class="relative">
-        <input [value]="displayValue" (click)="togglePicker()" [placeholder]="placeholder" [disabled]="disabled"
-            readonly
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rtl:text-right rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
-            [class.opacity-50]="disabled">
+  <!-- Input Field -->
+  <div class="relative">
+    <input
+      [value]="displayValue"
+      (click)="togglePicker()"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      readonly
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rtl:text-right rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
+      [class.opacity-50]="disabled"
+    />
 
-        <!-- Calendar Icon -->
-        <div class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 rtl:pl-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-            </svg>
-        </div>
-        @if(selectedDate && !disabled){
-        <button (click)="clearSelection(); $event.stopPropagation()"
-            class="absolute ltr:right-8 rtl:left-8 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-            type="button">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-        }
-
+    <!-- Calendar Icon -->
+    <div
+      class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 rtl:pl-3 pointer-events-none"
+    >
+      <svg
+        class="w-4 h-4 text-gray-500 dark:text-gray-400"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+        />
+      </svg>
     </div>
 
-    <!-- Main Picker Dropdown -->
-    @if(showPicker){
-    <div
-        class="absolute top-full ltr:left-0 rtl:right-0 mt-1 z-50 bg-white rounded-lg shadow-lg dark:bg-gray-700 border border-gray-200 dark:border-gray-600 min-w-80">
+    @if(selectedDate && !disabled){
+    <button
+      (click)="clearSelection(); $event.stopPropagation()"
+      class="absolute ltr:right-8 rtl:left-8 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+      type="button"
+    >
+      <svg
+        class="w-4 h-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"
+        />
+      </svg>
+    </button>
+    }
+  </div>
 
-        <!-- Date Picker Section -->
-        @if(mode === 'date' || mode === 'both'){
-        <div class="p-4">
-            <!-- Calendar Header -->
-            @if(currentView === 'calendar') {
-            <div class="flex justify-between items-center mb-4">
-                <!-- Left side buttons -->
-                <div class="flex gap-1">
-                    <button (click)="previousYear()" type="button"
-                        class="inline-flex p-1.5 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
-                        [title]="isRTL ? 'سال قبل' : 'Previous Year'">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            @if(isRTL){
-                            <!-- RTL: Next Year (points right) -->
-                            <path fill-rule="evenodd"
-                                d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0zm-4 0a1 1 0 010-1.414L10.586 10 6.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                            } @else {
-                            <!-- LTR: Previous Year (points left) -->
-                            <path fill-rule="evenodd"
-                                d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
-                                clip-rule="evenodd"></path>
-                            }
-                        </svg>
-                    </button>
-                    <button (click)="previousMonth()" type="button"
-                        class="inline-flex p-1.5 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
-                        [title]="isRTL ? 'ماه قبل' : 'Previous Month'">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            @if(isRTL){
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                            } @else {
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                            }
-                        </svg>
-                    </button>
-                </div>
+  <!-- Main Picker Dropdown -->
+  @if(showPicker){
+  <div
+    class="absolute top-full ltr:left-0 rtl:right-0 mt-1 z-50 bg-white rounded-lg shadow-lg dark:bg-gray-700 border border-gray-200 dark:border-gray-600 min-w-80"
+  >
+    <!-- Date Picker Section -->
+    @if(mode === 'date' || mode === 'both'){ @if(currentView === 'calendar') {
+    <app-calendar
+      [currentMonth]="currentMonth"
+      [selectedDate]="selectedDate"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      (dateSelected)="onDateSelected($event)"
+      (viewChange)="onViewChange($event)"
+    >
+    </app-calendar>
+    } @if(currentView === 'month') {
+    <app-month-selector
+      (monthSelected)="onMonthSelected($event)"
+      (backToCalendar)="backToCalendar()"
+    >
+    </app-month-selector>
+    } @if(currentView === 'year') {
+    <app-year-selector
+      [currentMonth]="currentMonth"
+      (yearSelected)="onYearSelected($event)"
+      (backToCalendar)="backToCalendar()"
+    >
+    </app-year-selector>
+    }
 
-                <!-- Month and Year Selector -->
-                <div class="flex gap-2">
-                    <button (click)="showMonthSelection()" type="button"
-                        class="px-3 py-1 text-lg font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        {{ getCalendarMonthName() }}
-                    </button>
-                    <button (click)="showYearSelection()" type="button"
-                        class="px-3 py-1 text-lg font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        {{ getCalendarYear() }}
-                    </button>
-                </div>
+    <!-- Today Button -->
+    @if(currentView === 'calendar') {
+    <div class="flex justify-center mt-4 pb-4">
+      <button
+        (click)="selectToday()"
+        type="button"
+        class="px-4 py-2 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg"
+      >
+        {{ isRTL ? 'امروز' : 'Today' }}
+      </button>
+    </div>
+    } }
 
-                <!-- Right side buttons -->
-                <div class="flex gap-1">
-                    <button (click)="nextMonth()" type="button"
-                        class="inline-flex p-1.5 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
-                        [title]="isRTL ? 'ماه بعد' : 'Next Month'">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            @if(isRTL){
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                            } @else {
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                            }
-                        </svg>
-                    </button>
-                    <button (click)="nextYear()" type="button"
-                        class="inline-flex p-1.5 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
-                        [title]="isRTL ? 'سال بعد' : 'Next Year'">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            @if(isRTL){
-                            <!-- RTL: Previous Year (points left) -->
-                            <path fill-rule="evenodd"
-                                d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
-                                clip-rule="evenodd"></path>
-                            } @else {
-                            <!-- LTR: Next Year (points right) -->
-                            <path fill-rule="evenodd"
-                                d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0zm-4 0a1 1 0 010-1.414L10.586 10 6.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                            }
-                        </svg>
-                    </button>
-                </div>
-            </div>
+    <!-- Time Picker Section -->
+    @if((mode === 'time' || mode === 'both') && (mode === 'time' ||
+    showTimeSection)){
+    <app-time-picker
+      [selectedTime]="selectedTime"
+      [is24Hour]="is24Hour"
+      (timeSelected)="onTimeSelected($event)"
+      (timeFormatToggled)="onTimeFormatToggled()"
+    >
+    </app-time-picker>
 
-            <!-- Week Days -->
-            <div class="grid grid-cols-7 gap-1 mb-2">
-                @for (day of weekDays; track $index) {
-                <div class="h-6 text-center text-sm font-medium text-gray-500 dark:text-gray-400"
-                    [class.text-red-600]="isRTL && $index === 6" [class.dark:text-red-400]="isRTL && $index === 6">
-                    {{ day }}
-                </div>
-                }
-            </div>
+    <!-- Done Button for time picker in 'both' mode -->
+    @if(mode === 'both'){
+    <div class="flex justify-center mt-4 pb-4">
+      <button
+        (click)="closePicker()"
+        type="button"
+        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+      >
+        {{ isRTL ? 'انجام' : 'Done' }}
+      </button>
+    </div>
+    } }
 
-            <!-- Calendar Grid -->
-            <div class="grid grid-cols-7 gap-1">
-                @for (day of days; track $index) {
-                <button (click)="selectDate(day)" [class]="getDayClasses(day)" type="button"
-                    [disabled]="!isCurrentMonth(day)">
-                    {{ getDayNumber(day) }}
-                </button>
-                }
-            </div>
-
-            <!-- Today Button -->
-            <div class="flex justify-center mt-4">
-                <button (click)="selectToday()" type="button"
-                    class="px-4 py-2 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg">
-                    {{ isRTL ? 'امروز' : 'Today' }}
-                </button>
-            </div>
-            }
-
-            <!-- Month Selection View -->
-            @if(currentView === 'month') {
-            <div class="text-center">
-                <!-- Header -->
-                <div class="flex justify-between items-center mb-6">
-                    <button (click)="backToCalendar()" type="button"
-                        class="inline-flex p-2 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        {{ isRTL ? 'انتخاب ماه' : 'Select Month' }}
-                    </h3>
-                    <div class="w-9"></div> <!-- Spacer for alignment -->
-                </div>
-
-                <!-- Months Grid -->
-                <div class="grid grid-cols-3 gap-3">
-                    @for (monthRow of getMonthsGrid(); track $index) {
-                    @for (month of monthRow; track month.number) {
-                    <button (click)="selectMonth(month.number)" type="button"
-                        class="p-4 text-sm font-medium text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors border border-gray-200 dark:border-gray-600">
-                        {{ month.name }}
-                    </button>
-                    }
-                    }
-                </div>
-            </div>
-            }
-
-            <!-- Year Selection View -->
-            @if(currentView === 'year') {
-            <div class="text-center w-80">
-                <!-- Header with Decade Navigation -->
-                <div class="flex justify-between items-center mb-4">
-                    <button (click)="previousDecade()" type="button"
-                        class="inline-flex p-2 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        [title]="isRTL ? 'دهه قبل' : 'Previous Decade'">
-                        <svg class="w-5 h-5" [class.rotate-180]="isRTL" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-
-                    <div class="flex flex-col items-center">
-                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-                            {{ isRTL ? 'انتخاب سال' : 'Select Year' }}
-                        </h3>
-                        <div class="flex gap-2 items-center">
-                            <span class="text-sm text-gray-600 dark:text-gray-400">
-                                {{ currentDecade - 1 }} - {{ currentDecade + 10 }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <button (click)="nextDecade()" type="button"
-                        class="inline-flex p-2 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        [title]="isRTL ? 'دهه بعد' : 'Next Decade'">
-                        <svg class="w-5 h-5" [class.rotate-180]="isRTL" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-
-                <!-- Quick Decade Navigation -->
-                <div class="flex justify-center gap-2 mb-4 flex-wrap">
-                    @for (decade of getAvailableDecades(); track decade) {
-                    <button (click)="jumpToDecade(decade)" type="button"
-                        class="px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        {{ decade - 1 }} - {{ decade + 10 }}
-                    </button>
-                    }
-                </div>
-
-                <!-- Years Grid -->
-                <div class="grid grid-cols-4 gap-2">
-                    @for (year of decadeYears; track year) {
-                    <button (click)="selectYear(year)" type="button" [class]="getYearButtonClasses(year)"
-                        [title]="year.toString()">
-                        {{ year }}
-                    </button>
-                    }
-                </div>
-
-                <!-- Quick Action Buttons -->
-                <div class="flex justify-center gap-2 mt-4">
-                    <button (click)="selectYear(getCurrentYear() - 1)" type="button"
-                        class="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        {{ isRTL ? 'سال قبل' : 'Last Year' }}
-                    </button>
-                    <button (click)="selectYear(getCurrentYear())" type="button"
-                        class="px-3 py-1 text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/40 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors">
-                        {{ isRTL ? 'امسال' : 'This Year' }}
-                    </button>
-                    <button (click)="selectYear(getCurrentYear() + 1)" type="button"
-                        class="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors">
-                        {{ isRTL ? 'سال بعد' : 'Next Year' }}
-                    </button>
-                </div>
-            </div>
-            }
-        </div>
-        }
-
-        <!-- Time Picker Section (shown under calendar for 'both' mode or alone for 'time' mode) -->
-        @if((mode === 'time' || mode === 'both') && (mode === 'time' || showTimeSection)){
-        <div class="border-t border-gray-200 dark:border-gray-600 p-4">
-            <div class="flex flex-row gap-4" [class.flex-row-reverse]="isRTL">
-                <!-- Hours -->
-                <div class="w-40">
-                    <div class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center">
-                        {{ isRTL ? 'ساعت' : 'Hours' }}
-                    </div>
-                    <div
-                        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        @for (hour of hours; track $index) {
-                        <button (click)="selectTime(hour, getCurrentMinute())"
-                            [class]="getTimeButtonClasses(hour, 'hour')" type="button">
-                            {{ getHourLabel(hour) }}
-                        </button>
-                        }
-                    </div>
-                </div>
-
-                <!-- Minutes -->
-                <div class="w-40">
-                    <div class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center">
-                        {{ isRTL ? 'دقیقه' : 'Minutes' }}
-                    </div>
-                    <div
-                        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-                        @for (minute of minutes; track $index) {
-                        <button (click)="selectTime(getCurrentHour(), minute)"
-                            [class]="getTimeButtonClasses(minute, 'minute')" type="button">
-                            {{ minute.toString().padStart(2, '0') }}
-                        </button>
-                        }
-                    </div>
-                </div>
-            </div>
-
-            <!-- Time Format Toggle (12h/24h) -->
-            <div class="flex justify-center mt-4">
-                <button (click)="toggleTimeFormat()" type="button"
-                    class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600 rounded-lg">
-                    {{ is24Hour ?
-                    (isRTL ? 'تغییر به 12 ساعته' : 'Switch to 12h') :
-                    (isRTL ? 'تغییر به 24 ساعته' : 'Switch to 24h')
-                    }}
-                </button>
-            </div>
-
-            <!-- Done Button for time picker in 'both' mode -->
-            @if(mode === 'both'){
-            <div class="flex justify-center mt-4">
-                <button (click)="closePicker()" type="button"
-                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
-                    {{ isRTL ? 'انجام' : 'Done' }}
-                </button>
-            </div>
-            }
-        </div>
-        }
-
-        <!-- Show Time Button for 'both' mode when time section is hidden -->
-        @if(mode === 'both' && !showTimeSection){
-        <div class="border-t border-gray-200 dark:border-gray-600 p-4">
-            <button (click)="showTimeSection = true" type="button"
-                class="w-full px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg">
-                {{ isRTL ? 'انتخاب زمان' : 'Select Time' }}
-            </button>
-        </div>
-        }
+    <!-- Show Time Button for 'both' mode when time section is hidden -->
+    @if(mode === 'both' && !showTimeSection && currentView === 'calendar'){
+    <div class="border-t border-gray-200 dark:border-gray-600 p-4">
+      <button
+        (click)="showTimeSection = true"
+        type="button"
+        class="w-full px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg"
+      >
+        {{ isRTL ? 'انتخاب زمان' : 'Select Time' }}
+      </button>
     </div>
     }
+  </div>
+  }
 </div>

@@ -1,0 +1,109 @@
+<div class="text-center w-80 p-4">
+  <!-- Header with Decade Navigation -->
+  <div class="flex justify-between items-center mb-4">
+    <button
+      (click)="previousDecade()"
+      type="button"
+      class="inline-flex p-2 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [title]="isRTL ? 'دهه قبل' : 'Previous Decade'"
+    >
+      <svg
+        class="w-5 h-5"
+        [class.rotate-180]="isRTL"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+
+    <div class="flex flex-col items-center">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+        {{ isRTL ? "انتخاب سال" : "Select Year" }}
+      </h3>
+      <div class="flex gap-2 items-center">
+        <span class="text-sm text-gray-600 dark:text-gray-400">
+          {{ currentDecade - 1 }} - {{ currentDecade + 10 }}
+        </span>
+      </div>
+    </div>
+
+    <button
+      (click)="nextDecade()"
+      type="button"
+      class="inline-flex p-2 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      [title]="isRTL ? 'دهه بعد' : 'Next Decade'"
+    >
+      <svg
+        class="w-5 h-5"
+        [class.rotate-180]="isRTL"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Quick Decade Navigation -->
+  <div class="flex justify-center gap-2 mb-4 flex-wrap">
+    @for (decade of getAvailableDecades(); track decade) {
+    <button
+      (click)="jumpToDecade(decade)"
+      type="button"
+      class="px-3 py-1 text-xs font-medium text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+    >
+      {{ decade - 1 }} - {{ decade + 10 }}
+    </button>
+    }
+  </div>
+
+  <!-- Years Grid -->
+  <div class="grid grid-cols-4 gap-2">
+    @for (year of decadeYears; track year) {
+    <button
+      (click)="selectYear(year)"
+      type="button"
+      [class]="getYearButtonClasses(year)"
+      [title]="year.toString()"
+    >
+      {{ year }}
+    </button>
+    }
+  </div>
+
+  <!-- Quick Action Buttons -->
+  <div class="flex justify-center gap-2 mt-4">
+    <button
+      (click)="selectYear(getCurrentYear() - 1)"
+      type="button"
+      class="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+    >
+      {{ isRTL ? "سال قبل" : "Last Year" }}
+    </button>
+    <button
+      (click)="selectYear(getCurrentYear())"
+      type="button"
+      class="px-3 py-1 text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/40 focus:outline-none focus:ring-2 focus:ring-green-500 transition-colors"
+    >
+      {{ isRTL ? "امسال" : "This Year" }}
+    </button>
+    <button
+      (click)="selectYear(getCurrentYear() + 1)"
+      type="button"
+      class="px-3 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/40 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+    >
+      {{ isRTL ? "سال بعد" : "Next Year" }}
+    </button>
+  </div>
+</div>

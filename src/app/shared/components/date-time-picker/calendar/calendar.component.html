@@ -1,0 +1,171 @@
+<div class="p-4">
+  <!-- Calendar Header -->
+  @if(currentView === 'calendar') {
+  <div class="flex justify-between items-center mb-4">
+    <!-- Left side buttons -->
+    <div class="flex gap-1">
+      <button
+        (click)="previousYear()"
+        type="button"
+        class="inline-flex p-1.5 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
+        [title]="isRTL ? 'سال قبل' : 'Previous Year'"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @if(isRTL){
+          <!-- RTL: Next Year (points right) -->
+          <path
+            fill-rule="evenodd"
+            d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0zm-4 0a1 1 0 010-1.414L10.586 10 6.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          } @else {
+          <!-- LTR: Previous Year (points left) -->
+          <path
+            fill-rule="evenodd"
+            d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
+            clip-rule="evenodd"
+          ></path>
+          }
+        </svg>
+      </button>
+      <button
+        (click)="previousMonth()"
+        type="button"
+        class="inline-flex p-1.5 text-sm font-medium text-gray-500 bg-white cursor-pointer dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
+        [title]="isRTL ? 'ماه قبل' : 'Previous Month'"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @if(isRTL){
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          } @else {
+          <path
+            fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          }
+        </svg>
+      </button>
+    </div>
+
+    <!-- Month and Year Selector -->
+    <div class="flex gap-2">
+      <button
+        (click)="showMonthSelection()"
+        type="button"
+        class="px-3 py-1 text-lg font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+      >
+        {{ getCalendarMonthName() }}
+      </button>
+      <button
+        (click)="showYearSelection()"
+        type="button"
+        class="px-3 py-1 text-lg font-semibold text-gray-900 dark:text-white bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+      >
+        {{ getCalendarYear() }}
+      </button>
+    </div>
+
+    <!-- Right side buttons -->
+    <div class="flex gap-1">
+      <button
+        (click)="nextMonth()"
+        type="button"
+        class="inline-flex p-1.5 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
+        [title]="isRTL ? 'ماه بعد' : 'Next Month'"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @if(isRTL){
+          <path
+            fill-rule="evenodd"
+            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          } @else {
+          <path
+            fill-rule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          }
+        </svg>
+      </button>
+      <button
+        (click)="nextYear()"
+        type="button"
+        class="inline-flex p-1.5 text-sm font-medium text-gray-500 cursor-pointer bg-white dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 focus:outline-none ring-2 ring-gray-200 dark:ring-gray-500"
+        [title]="isRTL ? 'سال بعد' : 'Next Year'"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          @if(isRTL){
+          <!-- RTL: Previous Year (points left) -->
+          <path
+            fill-rule="evenodd"
+            d="M15.707 15.707a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 010 1.414zm-6 0a1 1 0 01-1.414 0l-5-5a1 1 0 010-1.414l5-5a1 1 0 011.414 1.414L5.414 10l4.293 4.293a1 1 0 010 1.414z"
+            clip-rule="evenodd"
+          ></path>
+          } @else {
+          <!-- LTR: Next Year (points right) -->
+          <path
+            fill-rule="evenodd"
+            d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0zm-4 0a1 1 0 010-1.414L10.586 10 6.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+            clip-rule="evenodd"
+          ></path>
+          }
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Week Days -->
+  <div class="grid grid-cols-7 gap-1 mb-2">
+    @for (day of weekDays; track $index) {
+    <div
+      class="h-6 text-center text-sm font-medium text-gray-500 dark:text-gray-400"
+      [class.text-red-600]="isRTL && $index === 6"
+      [class.dark:text-red-400]="isRTL && $index === 6"
+    >
+      {{ day }}
+    </div>
+    }
+  </div>
+
+  <!-- Calendar Grid -->
+  <div class="grid grid-cols-7 gap-1">
+    @for (day of calendarDays; track $index) {
+    <button
+      (click)="selectDate(day.date)"
+      [class]="getDayClasses(day)"
+      type="button"
+      [disabled]="!day.isCurrentMonth || day.isDisabled"
+    >
+      {{ day.dayNumber }}
+    </button>
+    }
+  </div>
+  }
+</div>

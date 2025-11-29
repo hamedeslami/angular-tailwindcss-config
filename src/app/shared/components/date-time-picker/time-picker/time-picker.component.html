@@ -1,0 +1,66 @@
+<div class="border-t border-gray-200 dark:border-gray-600 p-4">
+  <div class="flex flex-row gap-4" [class.flex-row-reverse]="isRTL">
+    <!-- Hours -->
+    <div class="w-40">
+      <div
+        class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center"
+      >
+        {{ isRTL ? "ساعت" : "Hours" }}
+      </div>
+      <div
+        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      >
+        @for (hour of hours; track $index) {
+        <button
+          (click)="selectTime(hour, getCurrentMinute())"
+          [class]="getTimeButtonClasses(hour, 'hour')"
+          type="button"
+        >
+          {{ getHourLabel(hour) }}
+        </button>
+        }
+      </div>
+    </div>
+
+    <!-- Minutes -->
+    <div class="w-40">
+      <div
+        class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center"
+      >
+        {{ isRTL ? "دقیقه" : "Minutes" }}
+      </div>
+      <div
+        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+      >
+        @for (minute of minutes; track $index) {
+        <button
+          (click)="selectTime(getCurrentHour(), minute)"
+          [class]="getTimeButtonClasses(minute, 'minute')"
+          type="button"
+        >
+          {{ minute.toString().padStart(2, "0") }}
+        </button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Time Format Toggle (12h/24h) -->
+  <div class="flex justify-center mt-4">
+    <button
+      (click)="toggleTimeFormat()"
+      type="button"
+      class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600 rounded-lg"
+    >
+      {{
+        is24Hour
+          ? isRTL
+            ? "تغییر به 12 ساعته"
+            : "Switch to 12h"
+          : isRTL
+          ? "تغییر به 24 ساعته"
+          : "Switch to 24h"
+      }}
+    </button>
+  </div>
+</div>
