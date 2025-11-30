@@ -1,8 +1,8 @@
 <div class="relative" #pickerContainer>
   <!-- Input Field -->
   <div class="relative">
-    <input [id]="id()" [value]="displayValue" (click)="togglePicker()" placeholder=" " [disabled]="disabled()"
-      readonly [ngClass]="{
+    <input [id]="id()" [value]="displayValue" (click)="togglePicker()" placeholder=" " [disabled]="disabled()" readonly
+      [ngClass]="{
       'block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer': true,
       'border-red-600 focus:border-red-600 border-2 dark:border-red-600 focus:dark:border-red-600': error()
     }" />
@@ -44,8 +44,8 @@
     class="absolute top-full ltr:left-0 rtl:right-0 mt-1 z-50 bg-white rounded-lg shadow-lg dark:bg-gray-700 border border-gray-200 dark:border-gray-600 min-w-80">
     <!-- Date Picker Section -->
     @if(mode() === 'date' || mode() === 'both'){ @if(currentView === 'calendar') {
-    <app-calendar [currentMonth]="currentMonth" [selectedDate]="selectedDate" [minDate]="minDate()" [maxDate]="maxDate()"
-      (dateSelected)="onDateSelected($event)" (viewChange)="onViewChange($event)">
+    <app-calendar [currentMonth]="currentMonth" [selectedDate]="selectedDate" [minDate]="minDate()"
+      [maxDate]="maxDate()" (dateSelected)="onDateSelected($event)" (viewChange)="onViewChange($event)">
     </app-calendar>
     } @if(currentView === 'month') {
     <app-month-selector (monthSelected)="onMonthSelected($event)" (backToCalendar)="backToCalendar()">
@@ -58,7 +58,7 @@
 
     <!-- Today Button -->
     @if(currentView === 'calendar') {
-    <div class="flex justify-center mt-4 pb-4">
+    <div class="flex justify-center mt-2 pb-2">
       <button (click)="selectToday()" type="button"
         class="px-4 py-2 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg">
         {{ isRTL ? 'امروز' : 'Today' }}
@@ -75,7 +75,7 @@
 
     <!-- Done Button for time picker in 'both' mode -->
     @if(mode() === 'both'){
-    <div class="flex justify-center mt-4 pb-4">
+    <div class="flex justify-center mt-2 pb-2">
       <button (click)="closePicker()" type="button"
         class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
         {{ isRTL ? 'انجام' : 'Done' }}

@@ -136,7 +136,7 @@ export class Calendar implements OnInit, OnChanges {
 
   getDayClasses(day: CalendarDate): string {
     const baseClasses =
-      'w-8 h-8 bg-gray-100 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500';
+      'w-8 h-8 bg-gray-100 text-sm font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-600';
 
     if (!day.isCurrentMonth || day.isDisabled) {
       return `${baseClasses} text-gray-400 dark:text-gray-500 cursor-not-allowed`;
