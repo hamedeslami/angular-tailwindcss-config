@@ -20,19 +20,20 @@ import {
   CalendarView,
   TimeSelection,
 } from './models/calendar-types';
-import { TimePickerComponent } from './time-picker/time-picker.component';
-import { YearSelectorComponent } from './calendar/year-selector.component';
-import { MonthSelectorComponent } from './calendar/month-selector.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { TimePicker } from './time-picker/time-picker';
+import { YearSelector } from './calendar/year-selector/year-selector';
+import { MonthSelector } from './calendar/month-selector/month-selector';
+import { Calendar } from './calendar/calendar';
+
 
 @Component({
   selector: 'app-date-time-picker',
   templateUrl: './date-time-picker.html',
   imports: [
-    TimePickerComponent,
-    YearSelectorComponent,
-    MonthSelectorComponent,
-    CalendarComponent,
+    TimePicker,
+    YearSelector,
+    MonthSelector,
+    Calendar,
   ],
   providers: [
     {

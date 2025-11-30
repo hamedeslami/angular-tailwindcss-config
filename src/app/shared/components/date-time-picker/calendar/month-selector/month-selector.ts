@@ -1,13 +1,13 @@
 import { Component, Output, EventEmitter, inject } from '@angular/core';
-import { DateService } from '../date.service';
+import { DateService } from '../../date.service';
 import { LangService } from '@core/services/lang.service';
-import { MonthInfo } from '../models/calendar-types';
+import { MonthInfo } from '../../models/calendar-types';
 
 @Component({
   selector: 'app-month-selector',
-  templateUrl: './month-selector.component.html',
+  templateUrl: './month-selector.html',
 })
-export class MonthSelectorComponent {
+export class MonthSelector {
   @Output() monthSelected = new EventEmitter<number>();
   @Output() backToCalendar = new EventEmitter<void>();
 

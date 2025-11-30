@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
-import { DateService } from '../date.service';
+import { DateService } from '../../date.service';
 import { LangService } from '@core/services/lang.service';
 
 @Component({
   selector: 'app-year-selector',
-  templateUrl: './year-selector.component.html',
+  templateUrl: './year-selector.html',
 })
-export class YearSelectorComponent {
+export class YearSelector {
   @Input() currentMonth!: Date;
   @Output() yearSelected = new EventEmitter<number>();
   @Output() backToCalendar = new EventEmitter<void>();

@@ -19,9 +19,9 @@ import {
 
 @Component({
   selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
+  templateUrl: './calendar.html',
 })
-export class CalendarComponent implements OnInit, OnChanges {
+export class Calendar implements OnInit, OnChanges {
   @Input() currentMonth!: Date;
   @Input() selectedDate: Date | null = null;
   @Input() minDate: Date | null = null;

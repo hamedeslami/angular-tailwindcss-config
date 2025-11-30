@@ -14,9 +14,9 @@ import { TimeSelection } from '../models/calendar-types';
 
 @Component({
   selector: 'app-time-picker',
-  templateUrl: './time-picker.component.html',
+  templateUrl: './time-picker.html',
 })
-export class TimePickerComponent implements OnInit, OnChanges {
+export class TimePicker implements OnInit, OnChanges {
   @Input() selectedTime: string = '';
   @Input() is24Hour: boolean = true;
   @Output() timeSelected = new EventEmitter<TimeSelection>();
