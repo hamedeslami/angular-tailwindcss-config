@@ -1,66 +1,76 @@
-<div class="border-t border-gray-200 dark:border-gray-600 p-4">
-  <div class="flex flex-row gap-4" [class.flex-row-reverse]="isRTL">
-    <!-- Hours -->
-    <div class="w-40">
-      <div
-        class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center"
-      >
-        {{ isRTL ? "ساعت" : "Hours" }}
-      </div>
-      <div
-        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-      >
-        @for (hour of hours; track $index) {
-        <button
-          (click)="selectTime(hour, getCurrentMinute())"
-          [class]="getTimeButtonClasses(hour, 'hour')"
-          type="button"
-        >
-          {{ getHourLabel(hour) }}
-        </button>
-        }
-      </div>
-    </div>
+<div class="w-80 border-t border-gray-200 dark:border-gray-600 p-4 flex flex-col h-96">
+  <!-- Added flex-col and fixed height -->
 
-    <!-- Minutes -->
-    <div class="w-40">
-      <div
-        class="text-sm font-medium text-gray-900 dark:text-white mb-2 text-center"
-      >
-        {{ isRTL ? "دقیقه" : "Minutes" }}
+  <!-- Header -->
+  <div class="text-center mb-4 flex-shrink-0"> <!-- Added flex-shrink-0 -->
+    <!-- Time Display with Input -->
+    <div class="flex justify-center items-center gap-2 mb-4 gap-4 rtl:flex-row-reverse">
+      <!-- Hour Input -->
+      <div class="flex flex-col items-center">
+        <input type="number" [value]="getDisplayHour()" (input)="onHourInput($event)" (focus)="$event.target.select()"
+          (click)="$event.stopPropagation()" [min]="is24Hour ? 0 : 1" [max]="is24Hour ? 23 : 12"
+          class="w-14 text-xl font-normal text-center bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md py-2 focus:border-blue-500 focus:outline-none dark:text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
       </div>
-      <div
-        class="h-48 overflow-y-auto space-y-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-      >
-        @for (minute of minutes; track $index) {
-        <button
-          (click)="selectTime(getCurrentHour(), minute)"
-          [class]="getTimeButtonClasses(minute, 'minute')"
-          type="button"
-        >
-          {{ minute.toString().padStart(2, "0") }}
-        </button>
-        }
+
+      <span class="text-xl font-normal text-gray-900 dark:text-white">:</span>
+
+      <!-- Minute Input -->
+      <div class="flex flex-col items-center">
+        <input type="number" [value]="selectedMinute.toString().padStart(2, '0')" (input)="onMinuteInput($event)"
+          (focus)="$event.target.select()" (click)="$event.stopPropagation()" min="0" max="59"
+          class="w-14 text-xl font-normal text-center bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md py-2 focus:border-blue-500 focus:outline-none dark:text-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
       </div>
     </div>
   </div>
 
-  <!-- Time Format Toggle (12h/24h) -->
-  <div class="flex justify-center mt-4">
-    <button
-      (click)="toggleTimeFormat()"
-      type="button"
-      class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-600 rounded-lg"
-    >
-      {{
-        is24Hour
-          ? isRTL
-            ? "تغییر به 12 ساعته"
-            : "Switch to 12h"
-          : isRTL
-          ? "تغییر به 24 ساعته"
-          : "Switch to 24h"
-      }}
+  <!-- Quick Selection Grid - Made scrollable -->
+  <div class="mb-4 flex-grow overflow-hidden"> <!-- Added flex-grow and overflow-hidden -->
+    <div class="flex justify-center items-center gap-4 h-full rtl:flex-row-reverse">
+      <!-- Hours Column -->
+      <div class="h-full flex flex-col">
+        <div class="text-xs font-medium text-gray-900 dark:text-white mb-2 text-center flex-shrink-0">
+          {{ isRTL ? 'ساعت' : 'Hours' }}
+        </div>
+        <div
+          class="w-24 h-full overflow-y-auto space-y-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 rounded border border-gray-200 dark:border-gray-600 p-1 flex-grow">
+          @for (hour of hours; track hour) {
+          <button (click)="selectTime(hour, selectedMinute)" [class]="getHourButtonClasses(hour)"
+            class="text-xs py-1.5 w-full" type="button">
+            {{ hour.toString().padStart(2, '0') }}
+          </button>
+          }
+        </div>
+      </div>
+
+      <!-- Minutes Column -->
+      <div class="h-full flex flex-col">
+        <div class="text-xs font-medium text-gray-900 dark:text-white mb-2 text-center flex-shrink-0">
+          {{ isRTL ? 'دقیقه' : 'Minutes' }}
+        </div>
+        <div
+          class="w-24 h-full overflow-y-auto space-y-1 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-gray-600 rounded border border-gray-200 dark:border-gray-600 p-1 flex-grow">
+          @for (minute of minutes; track minute) {
+          <button (click)="selectTime(getDisplayHourAsNumber(), minute)" [class]="getMinuteButtonClasses(minute)"
+            class="text-xs py-1.5 w-full" type="button">
+            {{ minute.toString().padStart(2, '0') }}
+          </button>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons - Fixed at bottom -->
+  <div class="flex justify-between border-t border-gray-200 dark:border-gray-700 pt-3 flex-shrink-0 mt-auto">
+    <!-- Added mt-auto and flex-shrink-0 -->
+    <button (click)="cancelSelection()"
+      class="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
+      {{ isRTL ? 'انصراف' : 'CANCEL' }}
+    </button>
+
+    <button (click)="confirmSelection()"
+      class="px-4 py-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">
+      {{ isRTL ? 'تأیید' : 'OK' }}
     </button>
   </div>
 </div>
