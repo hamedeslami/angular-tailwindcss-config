@@ -38,12 +38,12 @@ import { Calendar } from './calendar/calendar';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DateTimePickerComponent),
+      useExisting: forwardRef(() => DateTimePicker),
       multi: true,
     },
   ],
 })
-export class DateTimePickerComponent
+export class DateTimePicker
   implements ControlValueAccessor, OnInit, OnDestroy
 {
   @Input() minDate: Date | null = null;

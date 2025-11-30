@@ -9,7 +9,7 @@ import { AvatarText } from '@shared/components/avatar/avatar-text/avatar-text';
 import { Badge } from '@shared/components/badge/badge';
 import { Button } from '@shared/components/button/button';
 import { Checkbox } from '@shared/components/checkbox/checkbox';
-import { DateTimePickerComponent } from '@shared/components/date-time-picker/date-time-picker';
+import { DateTimePicker } from '@shared/components/date-time-picker/date-time-picker';
 import { Dropdown } from '@shared/components/dropdown/dropdown';
 import { Modal } from '@shared/components/modal/modal';
 import { Pagination } from '@shared/components/pagination/pagination';
@@ -27,7 +27,7 @@ import { FilterState } from '@shared/components/table/types/filter.types';
     Button,
     Dropdown,
     Checkbox,
-    DateTimePickerComponent,
+    DateTimePicker,
     FormsModule,
   ],
   templateUrl: './users.html',
