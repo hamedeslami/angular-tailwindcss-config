@@ -1,132 +1,93 @@
 <div class="relative" #pickerContainer>
   <!-- Input Field -->
   <div class="relative">
-    <input
-      [value]="displayValue"
-      (click)="togglePicker()"
-      [placeholder]="placeholder"
-      [disabled]="disabled"
-      readonly
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rtl:text-right rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
-      [class.opacity-50]="disabled"
-    />
-
-    <!-- Calendar Icon -->
-    <div
-      class="absolute inset-y-0 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 rtl:pl-3 pointer-events-none"
-    >
-      <svg
-        class="w-4 h-4 text-gray-500 dark:text-gray-400"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        viewBox="0 0 20 20"
-      >
-        <path
-          d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
-        />
+    <input [id]="id()" [value]="displayValue" (click)="togglePicker()" placeholder=" " [disabled]="disabled()"
+      readonly [ngClass]="{
+      'block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border-1 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer': true,
+      'border-red-600 focus:border-red-600 border-2 dark:border-red-600 focus:dark:border-red-600': error()
+    }" />
+    <label [for]="id()" [ngClass]="{
+      'absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] peer-focus:bg-white peer-focus:dark:bg-gray-800 peer-[&:not(:placeholder-shown)]:bg-white peer-[&:not(:placeholder-shown)]:dark:bg-gray-800 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 rtl:peer-placeholder-shown:-translate-x-1 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:translate-x-1/4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1': true,
+      'text-red-600 peer-focus:text-red-600 dark:text-red-600 peer-focus:dark:text-red-600': error()
+    }">
+      {{ label() }} @if (required()) {
+      <span class="text-red-500">*</span>
+      }
+    </label>
+    <button type="button" (click)="togglePicker()"
+      class="absolute inset-y-0 cursor-pointer end-3 flex items-center text-gray-500 dark:text-gray-400" tabindex="-1">
+      <svg class="fill-current pointer-events-none text-gray-500 dark:text-gray-400" width="20" height="20"
+        viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M6.66659 1.5415C7.0808 1.5415 7.41658 1.87729 7.41658 2.2915V2.99984H12.5833V2.2915C12.5833 1.87729 12.919 1.5415 13.3333 1.5415C13.7475 1.5415 14.0833 1.87729 14.0833 2.2915V2.99984L15.4166 2.99984C16.5212 2.99984 17.4166 3.89527 17.4166 4.99984V7.49984V15.8332C17.4166 16.9377 16.5212 17.8332 15.4166 17.8332H4.58325C3.47868 17.8332 2.58325 16.9377 2.58325 15.8332V7.49984V4.99984C2.58325 3.89527 3.47868 2.99984 4.58325 2.99984L5.91659 2.99984V2.2915C5.91659 1.87729 6.25237 1.5415 6.66659 1.5415ZM6.66659 4.49984H4.58325C4.30711 4.49984 4.08325 4.7237 4.08325 4.99984V6.74984H15.9166V4.99984C15.9166 4.7237 15.6927 4.49984 15.4166 4.49984H13.3333H6.66659ZM15.9166 8.24984H4.08325V15.8332C4.08325 16.1093 4.30711 16.3332 4.58325 16.3332H15.4166C15.6927 16.3332 15.9166 16.1093 15.9166 15.8332V8.24984Z"
+          fill=""></path>
       </svg>
-    </div>
-
+    </button>
     @if(selectedDate && !disabled){
-    <button
-      (click)="clearSelection(); $event.stopPropagation()"
-      class="absolute ltr:right-8 rtl:left-8 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-      type="button"
-    >
-      <svg
-        class="w-4 h-4"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        />
+    <button (click)="clearSelection(); $event.stopPropagation()"
+      class="absolute cursor-pointer ltr:right-8 rtl:left-8 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+      type="button">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
     }
   </div>
+  @if(error()) {
+  <div class="text-red-500 text-xs mt-1">{{ errorMessage() }}</div>
+  }
+
 
   <!-- Main Picker Dropdown -->
   @if(showPicker){
   <div
-    class="absolute top-full ltr:left-0 rtl:right-0 mt-1 z-50 bg-white rounded-lg shadow-lg dark:bg-gray-700 border border-gray-200 dark:border-gray-600 min-w-80"
-  >
+    class="absolute top-full ltr:left-0 rtl:right-0 mt-1 z-50 bg-white rounded-lg shadow-lg dark:bg-gray-700 border border-gray-200 dark:border-gray-600 min-w-80">
     <!-- Date Picker Section -->
-    @if(mode === 'date' || mode === 'both'){ @if(currentView === 'calendar') {
-    <app-calendar
-      [currentMonth]="currentMonth"
-      [selectedDate]="selectedDate"
-      [minDate]="minDate"
-      [maxDate]="maxDate"
-      (dateSelected)="onDateSelected($event)"
-      (viewChange)="onViewChange($event)"
-    >
+    @if(mode() === 'date' || mode() === 'both'){ @if(currentView === 'calendar') {
+    <app-calendar [currentMonth]="currentMonth" [selectedDate]="selectedDate" [minDate]="minDate()" [maxDate]="maxDate()"
+      (dateSelected)="onDateSelected($event)" (viewChange)="onViewChange($event)">
     </app-calendar>
     } @if(currentView === 'month') {
-    <app-month-selector
-      (monthSelected)="onMonthSelected($event)"
-      (backToCalendar)="backToCalendar()"
-    >
+    <app-month-selector (monthSelected)="onMonthSelected($event)" (backToCalendar)="backToCalendar()">
     </app-month-selector>
     } @if(currentView === 'year') {
-    <app-year-selector
-      [currentMonth]="currentMonth"
-      (yearSelected)="onYearSelected($event)"
-      (backToCalendar)="backToCalendar()"
-    >
+    <app-year-selector [currentMonth]="currentMonth" (yearSelected)="onYearSelected($event)"
+      (backToCalendar)="backToCalendar()">
     </app-year-selector>
     }
 
     <!-- Today Button -->
     @if(currentView === 'calendar') {
     <div class="flex justify-center mt-4 pb-4">
-      <button
-        (click)="selectToday()"
-        type="button"
-        class="px-4 py-2 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg"
-      >
+      <button (click)="selectToday()" type="button"
+        class="px-4 py-2 text-sm font-medium text-blue-600 cursor-pointer hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg">
         {{ isRTL ? 'امروز' : 'Today' }}
       </button>
     </div>
     } }
 
     <!-- Time Picker Section -->
-    @if((mode === 'time' || mode === 'both') && (mode === 'time' ||
+    @if((mode() === 'time' || mode() === 'both') && (mode() === 'time' ||
     showTimeSection)){
-    <app-time-picker
-      [selectedTime]="selectedTime"
-      [is24Hour]="is24Hour"
-      (timeSelected)="onTimeSelected($event)"
-      (timeFormatToggled)="onTimeFormatToggled()"
-    >
+    <app-time-picker [selectedTime]="selectedTime" [is24Hour]="is24Hour" (timeSelected)="onTimeSelected($event)"
+      (timeFormatToggled)="onTimeFormatToggled()">
     </app-time-picker>
 
     <!-- Done Button for time picker in 'both' mode -->
-    @if(mode === 'both'){
+    @if(mode() === 'both'){
     <div class="flex justify-center mt-4 pb-4">
-      <button
-        (click)="closePicker()"
-        type="button"
-        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
-      >
+      <button (click)="closePicker()" type="button"
+        class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg">
         {{ isRTL ? 'انجام' : 'Done' }}
       </button>
     </div>
     } }
 
     <!-- Show Time Button for 'both' mode when time section is hidden -->
-    @if(mode === 'both' && !showTimeSection && currentView === 'calendar'){
+    @if(mode() === 'both' && !showTimeSection && currentView === 'calendar'){
     <div class="border-t border-gray-200 dark:border-gray-600 p-4">
-      <button
-        (click)="showTimeSection = true"
-        type="button"
-        class="w-full px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg"
-      >
+      <button (click)="showTimeSection = true" type="button"
+        class="w-full px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-500 dark:hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 rounded-lg">
         {{ isRTL ? 'انتخاب زمان' : 'Select Time' }}
       </button>
     </div>

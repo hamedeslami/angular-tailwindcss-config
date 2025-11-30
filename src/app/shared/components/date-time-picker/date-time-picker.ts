@@ -9,6 +9,9 @@ import {
   inject,
   effect,
   HostListener,
+  signal,
+  input,
+  output,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { format, isValid, startOfDay, setHours, setMinutes } from 'date-fns';
@@ -24,6 +27,7 @@ import { TimePicker } from './time-picker/time-picker';
 import { YearSelector } from './calendar/year-selector/year-selector';
 import { MonthSelector } from './calendar/month-selector/month-selector';
 import { Calendar } from './calendar/calendar';
+import { NgClass } from '@angular/common';
 
 
 @Component({
@@ -34,6 +38,7 @@ import { Calendar } from './calendar/calendar';
     YearSelector,
     MonthSelector,
     Calendar,
+    NgClass
   ],
   providers: [
     {
@@ -46,14 +51,19 @@ import { Calendar } from './calendar/calendar';
 export class DateTimePicker
   implements ControlValueAccessor, OnInit, OnDestroy
 {
-  @Input() minDate: Date | null = null;
-  @Input() maxDate: Date | null = null;
-  @Input() dateFormat: string = 'auto';
-  @Input() timeFormat: string = 'auto';
-  @Input() mode: PickerMode = 'both';
-  @Input() placeholder: string = 'Select date and time';
-  @Input() disabled: boolean = false;
-  @Output() dateTimeChange = new EventEmitter<Date | null>();
+  minDate = input<Date | null>(null);
+  maxDate = input<Date | null>(null);
+  dateFormat = input<string>('auto');
+  timeFormat = input<string>('auto');
+  mode = input<PickerMode>('both');
+  placeholder = input<string>('Select date and time');
+  disabled = input<boolean>(false);
+  error = input<boolean>(false);
+  id = input<string>('date-picker');
+  label = input<string>('date-picker');
+  required = input<boolean>(false);
+  errorMessage = input<string>('');
+  dateTimeChange = output<Date | null>();
 
   // State management
   selectedDate: Date | null = null;
@@ -82,7 +92,7 @@ export class DateTimePicker
   }
 
   ngOnInit() {
-    if (this.mode === 'time') {
+    if (this.mode() === 'time') {
       this.showTimeSection = true;
     }
   }
@@ -123,10 +133,6 @@ export class DateTimePicker
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
-  }
-
   // Date selection handlers
   onDateSelected(date: Date): void {
     let newDate: Date;
@@ -140,7 +146,7 @@ export class DateTimePicker
 
     this.selectedDate = newDate;
 
-    if (this.mode === 'both') {
+    if (this.mode() === 'both') {
       this.showTimeSection = true;
     } else {
       this.showPicker = false;
@@ -208,15 +214,15 @@ export class DateTimePicker
 
   // UI actions
   togglePicker(): void {
-    if (this.disabled) return;
+    if (this.disabled()) return;
 
     this.showPicker = !this.showPicker;
 
     if (this.showPicker) {
       this.backToCalendar();
-      if (this.mode === 'time') {
+      if (this.mode() === 'time') {
         this.showTimeSection = true;
-      } else if (this.mode === 'both') {
+      } else if (this.mode() === 'both') {
         this.showTimeSection = false;
       }
     }
@@ -265,7 +271,7 @@ export class DateTimePicker
       newDate = startOfDay(date);
     }
     this.selectedDate = newDate;
-    if (this.mode === 'both') {
+    if (this.mode() === 'both') {
       this.showTimeSection = true;
     }
     this.updateValue();
@@ -279,14 +285,14 @@ export class DateTimePicker
   }
 
   private getEffectiveDateFormat(): string {
-    if (this.dateFormat !== 'auto') return this.dateFormat;
+    if (this.dateFormat() !== 'auto') return this.dateFormat();
     return this.dateService.getCalendarType() === 'jalali'
       ? 'yyyy/MM/dd'
       : 'MM/dd/yyyy';
   }
 
   private getEffectiveTimeFormat(): string {
-    if (this.timeFormat !== 'auto') return this.timeFormat;
+    if (this.timeFormat() !== 'auto') return this.timeFormat();
     return this.is24Hour ? 'HH:mm' : 'hh:mm a';
   }
 
@@ -296,7 +302,7 @@ export class DateTimePicker
     const dateFormat = this.getEffectiveDateFormat();
     const timeFormat = this.getEffectiveTimeFormat();
 
-    switch (this.mode) {
+    switch (this.mode()) {
       case 'date':
         return this.dateService.formatDate(this.selectedDate, dateFormat);
       case 'time':
