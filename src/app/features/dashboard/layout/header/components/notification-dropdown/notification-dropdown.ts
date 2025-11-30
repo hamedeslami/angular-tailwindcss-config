@@ -3,13 +3,14 @@ import { ChangeDetectionStrategy, Component, ElementRef, inject, ViewChild } fro
 import { LangService } from '@core/services/lang.service';
 import { TextService } from '@core/services/text.service';
 import { LAYOUT_TEXTS } from '@features/dashboard/content/layout.text';
+import { AvatarText } from '@shared/components/avatar/avatar-text/avatar-text';
 import { Dropdown } from '@shared/components/dropdown/dropdown';
 
 
 @Component({
   selector: 'app-notification-dropdown',
   standalone: true,
-  imports: [CommonModule, Dropdown],
+  imports: [CommonModule, Dropdown, AvatarText],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './notification-dropdown.html'
 })
