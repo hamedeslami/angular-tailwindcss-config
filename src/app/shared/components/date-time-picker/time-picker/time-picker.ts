@@ -73,15 +73,8 @@ export class TimePicker implements OnInit, OnChanges {
 
     this.selectedHour = finalHour;
     this.selectedMinute = minute;
-    // Don't emit here, only when confirm is clicked
   }
 
-  // AM/PM toggle
-  toggleAmPm(): void {
-    this.isPm = !this.isPm;
-    // Update the time with new AM/PM setting
-    this.selectTime(this.getDisplayHourAsNumber(), this.selectedMinute);
-  }
 
   // Input handlers
   onHourInput(event: Event): void {
@@ -143,17 +136,9 @@ export class TimePicker implements OnInit, OnChanges {
     return parseInt(displayHour, 10);
   }
 
-  getDisplayTime(): string {
-    const hour = this.getDisplayHour();
-    const minute = this.selectedMinute.toString().padStart(2, '0');
-    const ampm = this.is24Hour ? '' : (this.isPm ? ' PM' : ' AM');
-
-    return `${hour}:${minute}${ampm}`;
-  }
-
   // Style methods
   getHourButtonClasses(hour: number): string {
-    const baseClasses = 'w-full py-1.5 text-xs rounded transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-blue-500';
+    const baseClasses = 'w-full py-1.5 text-sm rounded transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-blue-500';
     const currentHour = this.getDisplayHourAsNumber();
 
     if (currentHour === hour) {
@@ -164,23 +149,13 @@ export class TimePicker implements OnInit, OnChanges {
   }
 
   getMinuteButtonClasses(minute: number): string {
-    const baseClasses = 'w-full py-1.5 text-xs rounded transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-blue-500';
+    const baseClasses = 'w-full py-1.5 text-sm rounded transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-blue-500';
 
     if (this.selectedMinute === minute) {
       return `${baseClasses} bg-blue-600 text-white hover:bg-blue-700`;
     }
 
     return `${baseClasses} text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600`;
-  }
-
-  getAmPmButtonClasses(): string {
-    const baseClasses = 'px-6 py-3 text-base font-medium rounded-lg transition-all duration-200';
-
-    if (this.isPm) {
-      return `${baseClasses} bg-blue-600 text-white hover:bg-blue-700`;
-    }
-
-    return `${baseClasses} bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600`;
   }
 
   // Action methods
